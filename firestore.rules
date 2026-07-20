@@ -1,0 +1,132 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ---------- Helpers ----------
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.role == 'admin';
+    }
+
+    function isOwner(uid) {
+      return isSignedIn() && request.auth.uid == uid;
+    }
+
+    function hasOnlyKeys(allowedKeys) {
+      return request.resource.data.keys().hasOnly(allowedKeys);
+    }
+
+    // ---------- users/{uid} ----------
+    // Created only by the provisionStudentAccount Cloud Function (Admin SDK,
+    // bypasses rules). Students may only ever flip mustChangePassword to
+    // false once they've actually changed it — nothing else about their own
+    // account (role, program, applicationId) is client-writable.
+    match /users/{uid} {
+      allow read: if isOwner(uid) || isAdmin();
+      allow create: if false;
+      allow update: if (isOwner(uid)
+                          && hasOnlyKeys(['mustChangePassword'])
+                          && request.resource.data.mustChangePassword == false)
+                        || isAdmin();
+      allow delete: if isAdmin();
+    }
+
+    // ---------- programs/{programKey} ----------
+    // Public read-only reference data (name, amount, fixed start date) for
+    // certificate / diploma / higher-diploma / licensing. Only staff edit it.
+    match /programs/{programKey} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------- certificates/{id} ----------
+    // Powers the public Verify page (verify.html) — anyone can look up a
+    // certificate/license by serial number with no account. Only staff
+    // create/edit these (see "Creating your first admin" in the blueprint
+    // for how to grant that role).
+    match /certificates/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------- applications/{appId} ----------
+    // Certificate / Diploma / Higher Diploma applications from the Apply
+    // form. Public can create one (the application itself); after that,
+    // only the Cloud Functions (payment webhook / admin confirmation) and
+    // staff can change status or mark it paid — never the applicant
+    // directly.
+    match /applications/{appId} {
+      allow create: if request.resource.data.keys().hasAll(
+                        ['fullName', 'email', 'phone', 'program', 'startDate', 'status',
+                         'paymentStatus', 'paymentPlan', 'installmentsPaid', 'installmentsTotal', 'createdAt']
+                      )
+                      // FIXED PARAMETERS: Now explicitly supports your front-end dropdown values
+                      && request.resource.data.program in ['CGTIA Certificate', 'CGTIA Diploma', 'CGTIA Higher Diploma']
+                      && request.resource.data.status == 'pending'
+                      && request.resource.data.paymentStatus == 'unpaid'
+                      && request.resource.data.paymentPlan in ['full', 'installment']
+                      && request.resource.data.installmentsPaid == 0
+                      && request.resource.data.installmentsTotal in [1, 3];
+      allow read: if isAdmin()
+                    || (isSignedIn() && resource.data.uid == request.auth.uid);
+      allow update: if isAdmin()
+                      || (
+                        resource.data.paymentStatus == 'unpaid'
+                        && resource.data.installmentsPaid == 0
+                        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['paymentPlan', 'installmentsTotal', 'updatedAt'])
+                        && request.resource.data.paymentPlan in ['full', 'installment']
+                        && request.resource.data.installmentsTotal in [1, 3]
+                      );
+      allow delete: if isAdmin();
+    }
+
+    // ---------- licensingApplications/{reqId} ----------
+    // No account is ever auto-created for these (per the site's own auth
+    // flow) — review and any follow-up happens off-platform by staff.
+    match /licensingApplications/{reqId} {
+      allow create: if request.resource.data.keys().hasAll(
+                        ['fullName', 'email', 'phone', 'status', 'paymentStatus', 'createdAt']
+                      )
+                      && request.resource.data.status == 'pending'
+                      && request.resource.data.paymentStatus == 'unpaid';
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- customRequests/{reqId} ----------
+    // Individual / School / Organization clinical-placement & partnership
+    // requests from the Custom page. Quoted and handled manually by staff —
+    // no account, no payment flow.
+    match /customRequests/{reqId} {
+      allow create: if request.resource.data.keys().hasAll(
+                        ['applicantType', 'name', 'email', 'phone', 'status', 'createdAt']
+                      )
+                      && request.resource.data.applicantType in ['individual', 'school', 'organization']
+                      && request.resource.data.status == 'new';
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // ---------- contactMessages/{msgId} ----------
+    // Both the general Contact form and the per-FAQ "Still have a question?"
+    // box write here.
+    match /contactMessages/{msgId} {
+      allow create: if request.resource.data.keys().hasAll(
+                        ['message', 'preferredContactMethod', 'contactValue', 'status', 'createdAt']
+                      )
+                      && request.resource.data.preferredContactMethod in ['email', 'whatsapp']
+                      && request.resource.data.status == 'new';
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Default deny for anything not explicitly matched above.
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    function isAdmin() {
+      return request.auth != null && request.auth.token.role == 'admin';
+    }
+
+    function isReasonableUpload() {
+      return request.resource.size < 10 * 1024 * 1024
+             && request.resource.contentType.matches('application/pdf|image/png|image/jpeg');
+    }
+
+    // ---------- Licensing application documents ----------
+    // Licensing applicants never get an account (per the site's auth flow —
+    // only Certificate/Diploma/Higher-Diploma students are provisioned one
+    // after payment), so these uploads happen while signed out. The path's
+    // {requestId} is an unguessable token minted client-side (crypto
+    // randomUUID) that matches the corresponding licensingApplications/{id}
+    // Firestore doc, so a file is only ever discoverable if you already
+    // know that id — but this is still an open write endpoint, so:
+    //   - Enable Firebase App Check on this project before going live, to
+    //     confirm uploads are coming from the real site and not a script.
+    //   - Only admins (staff) can ever read the files back; the applicant
+    //     who uploaded them cannot re-download them through this rule set.
+    match /licensing/{requestId}/{fileName} {
+      allow create: if isReasonableUpload();
+      allow read: if isAdmin();
+      allow update, delete: if isAdmin();
+    }
+
+    // Default deny everything else.
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
