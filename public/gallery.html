@@ -496,6 +496,18 @@
     <p class="text-xs text-slate-400 font-light mt-8 max-w-xl">Some photos and clips above are stand-in placeholders &mdash; drop your real classroom, lab, and placement footage into the same grid slots whenever you're ready.</p>
   </section>
 
+  <!-- Graduation Classes, year by year -->
+  <section class="w-full max-w-7xl mx-auto px-6 pb-32 md:pb-48">
+    <div class="text-left mb-10 md:mb-12 border-t border-slate-200/60 pt-12 md:pt-16">
+      <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3">Graduation</span>
+      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Every Graduating Class</h2>
+      <p class="text-slate-500 font-light text-sm md:text-base mt-3 max-w-xl">Browse graduates by year. See the top 3 from each class on the <a href="wall-of-fame.html" class="text-blue-800 underline">Wall of Fame</a>.</p>
+    </div>
+    <div id="galleryGraduationContainer">
+      <p class="text-center text-sm text-slate-400 py-12">Loading graduation photos&hellip;</p>
+    </div>
+  </section>
+
   <!-- Lightbox -->
   <div id="lightboxOverlay" class="lightbox-hidden fixed inset-0 z-[80] bg-slate-950/85 backdrop-blur-md flex items-center justify-center p-6" onclick="closeLightboxOnBackdrop(event)">
     <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white/80 hover:text-white text-xs font-bold tracking-widest uppercase z-10">Close</button>
@@ -519,6 +531,7 @@
             <li><a href="about.html" class="hover:text-blue-950 smooth-transition">About CGTIA</a></li>
             <li><a href="programs.html" class="hover:text-blue-950 smooth-transition">Programs</a></li>
             <li><a href="gallery.html" class="hover:text-blue-950 smooth-transition">Gallery</a></li>
+            <li><a href="wall-of-fame.html" class="hover:text-blue-950 smooth-transition">Wall of Fame</a></li>
           </ul>
         </div>
         <div class="space-y-4">
@@ -722,7 +735,8 @@
       </div>
 
       <div id="transferPane">
-        <p class="text-xs text-slate-500 leading-relaxed mb-5">Copy each detail below exactly &mdash; including the amount and the program name for your transfer remark &mdash; then tap "I've Made This Transfer." This is our preferred payment method.</p>
+        <p class="text-xs text-slate-500 leading-relaxed mb-3">Copy each detail below exactly &mdash; including the amount and the program name for your transfer remark &mdash; then tap "I've Made This Transfer." This is our preferred payment method.</p>
+        <p id="virtualAccountStatus" class="hidden text-[11px] text-blue-700 bg-blue-50 border border-blue-100 rounded-xl px-3 py-2 mb-5">Setting up a dedicated account number just for this application&hellip;</p>
         <div class="space-y-3">
           <div class="flex justify-between items-center px-5 py-4 rounded-2xl bg-amber-50 border border-amber-200">
             <div class="min-w-0">
@@ -741,7 +755,7 @@
           <div class="flex justify-between items-center px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200">
             <div>
               <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Bank Name</span>
-              <span class="text-sm font-semibold text-blue-950">[Bank Name Here]</span>
+              <span id="transferBankNameDisplay" class="text-sm font-semibold text-blue-950">[Bank Name Here]</span>
             </div>
           </div>
           <div class="flex justify-between items-center px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200">
@@ -754,11 +768,11 @@
           <div class="flex justify-between items-center px-5 py-4 rounded-2xl bg-slate-50 border border-slate-200">
             <div>
               <span class="text-[10px] font-bold uppercase tracking-widest text-slate-400 block mb-1">Account Name</span>
-              <span class="text-sm font-semibold text-blue-950">Caregivers Training & Internship Academy Ltd</span>
+              <span id="transferAccountNameDisplay" class="text-sm font-semibold text-blue-950">Caregivers Training & Internship Academy Ltd</span>
             </div>
           </div>
         </div>
-        <p class="text-[11px] text-slate-400 mt-4 leading-relaxed">Cross-check the account name shown above with your bank app before sending &mdash; it should read exactly "Caregivers Training & Internship Academy Ltd."</p>
+        <p id="transferAccountNote" class="text-[11px] text-slate-400 mt-4 leading-relaxed">Cross-check the account name shown above with your bank app before sending &mdash; it should read exactly "Caregivers Training & Internship Academy Ltd."</p>
         <button onclick="handleTransferConfirm()" class="w-full mt-6 py-4 rounded-full bg-blue-950 text-white text-xs font-semibold tracking-widest uppercase shadow-lg shadow-blue-950/20 hover:bg-blue-900 smooth-transition">
           I've Made This Transfer
         </button>
@@ -1376,6 +1390,12 @@
         cardBtn.className = 'flex-1 py-2.5 rounded-full text-[11px] font-bold tracking-wide uppercase text-slate-500 smooth-transition';
         transferPane.classList.remove('hidden');
         cardPane.classList.add('hidden');
+        // Hook into the Firebase integration script (type="module", set
+        // once it loads) to fetch this applicant's dedicated virtual
+        // account — falls back to the static shared account if unset.
+        if (typeof window.ensureVirtualAccount === 'function') {
+          window.ensureVirtualAccount();
+        }
       }
     }
 
@@ -1688,6 +1708,26 @@
        APPLY FORM (Certificate / Diploma / Higher Diploma)
        ===================================================================== */
     let __currentApplicationId = null;
+    let __virtualAccountFetched = false;
+
+    /**
+     * Best-effort staff notification via the Netlify function — since
+     * Netlify Functions can't listen for Firestore writes the way a
+     * Firebase Cloud Function trigger can, the frontend calls this
+     * directly right after each successful submission. Never blocks or
+     * fails the person's actual submission if this call has trouble.
+     */
+    async function notifyStaff(type, summary) {
+      try {
+        await fetch('/.netlify/functions/notify-staff', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ type, summary })
+        });
+      } catch (err) {
+        console.error('notifyStaff failed (non-critical)', err);
+      }
+    }
 
     window.handleApplySubmit = async function (event) {
       event.preventDefault();
@@ -1723,6 +1763,8 @@
             updatedAt: serverTimestamp()
           });
           __currentApplicationId = docRef.id;
+          __virtualAccountFetched = false;
+          notifyStaff('application', { name: fullName, email, phone, program: programKey });
 
           setTimeout(() => {
             setStatusSuccess('Application Received', 'Thanks \u2014 complete payment below to secure your seat for this cohort.');
@@ -1745,13 +1787,65 @@
     };
 
     /* =====================================================================
+       DEDICATED VIRTUAL ACCOUNT (per-applicant, via Netlify function)
+       Fired when the Transfer tab is opened. Replaces the static shared
+       bank account with one unique to this application, so incoming
+       transfers reconcile automatically — falls back to leaving the
+       static account in place if Dedicated Virtual Accounts aren't
+       available on the Paystack account yet.
+       ===================================================================== */
+    window.ensureVirtualAccount = async function () {
+      if (!__currentApplicationId || __virtualAccountFetched) return;
+      const statusEl = document.getElementById('virtualAccountStatus');
+      if (statusEl) statusEl.classList.remove('hidden');
+
+      try {
+        const appSnap = await getDoc(doc(db, 'applications', __currentApplicationId));
+        if (!appSnap.exists()) return;
+        const appData = appSnap.data();
+
+        const res = await fetch('/.netlify/functions/create-virtual-account', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            applicationId: __currentApplicationId,
+            email: appData.email,
+            fullName: appData.fullName,
+            phone: appData.phone
+          })
+        });
+        const result = await res.json();
+
+        if (result && !result.fallback && result.accountNumber) {
+          __virtualAccountFetched = true;
+          const bankEl = document.getElementById('transferBankNameDisplay');
+          const acctEl = document.getElementById('acctNumberText');
+          const nameEl = document.getElementById('transferAccountNameDisplay');
+          const noteEl = document.getElementById('transferAccountNote');
+          if (bankEl) bankEl.innerText = result.bankName || '\u2014';
+          if (acctEl) acctEl.innerText = result.accountNumber;
+          if (nameEl) nameEl.innerText = result.accountName || 'Caregivers Training & Internship Academy Ltd';
+          if (noteEl) noteEl.innerText = 'This account number is unique to your application \u2014 payments to it are matched and confirmed automatically.';
+        }
+        // If result.fallback is true, quietly keep showing the static
+        // shared account already in the HTML — that's an expected path,
+        // not an error (Dedicated Virtual Accounts may not be enabled on
+        // the Paystack account yet).
+      } catch (err) {
+        console.error('ensureVirtualAccount failed, using shared account instead', err);
+      } finally {
+        if (statusEl) statusEl.classList.add('hidden');
+      }
+    };
+
+    /* =====================================================================
        PAYMENT CONFIRMATION (transfer + card)
        Both record the payment plan the person picked, then either wait on
        manual bank-transfer verification or hand off to Paystack. Neither
        one marks the application "paid" directly from the browser — that
-       only ever happens server-side (Paystack webhook, or staff via
-       adminConfirmTransferPayment), since a client marking its own payment
-       as complete would be trivial to fake.
+       only ever happens server-side (Paystack webhook, or staff via the
+       confirm-transfer Netlify function), since a client marking its own
+       payment as complete would be trivial to fake.
        ===================================================================== */
     window.handleTransferConfirm = async function () {
       if (!__currentApplicationId) { closePaymentScreen(); return; }
@@ -1815,7 +1909,9 @@
       const handler = PaystackPop.setup({
         // TODO: replace with your real Paystack public key (pk_live_... or
         // pk_test_... to start).
-        key: 'YOUR_PAYSTACK_PUBLIC_KEY',
+        // Test mode key — swap for your pk_live_... key only once you've
+        // fully tested the payment flow and are ready to accept real money.
+        key: 'pk_test_d5e8813de6f1b2a281dd55d6aa71211acaa2e2b4',
         email: state.email || 'applicant@example.com',
         amount: Math.round(amountDue * 100),
         currency: 'NGN',
@@ -1879,6 +1975,7 @@
           createdAt: serverTimestamp()
         });
         setStatusSuccess('Message Sent', 'Thanks for reaching out \u2014 we typically reply within 1\u20132 business days.');
+        notifyStaff('contact', { name, email, phone, subject });
       } catch (err) {
         console.error(err);
         setStatusError('Message Not Sent', 'Something went wrong and your message didn\u2019t go through. Please try again.', function () {
@@ -1920,6 +2017,7 @@
           });
           const methodLabel = method === 'whatsapp' ? 'WhatsApp' : 'email';
           setStatusSuccess('Question Sent', 'Thanks \u2014 we\u2019ll get back to you via ' + methodLabel + ' within 1\u20132 business days.');
+          notifyStaff('contact', { topic: faqTopic || 'FAQ question', contact: contactValue, method });
         } catch (err) {
           console.error(err);
           setStatusError('Not Sent', 'Something went wrong and your question didn\u2019t go through. Please try again.', function () {
@@ -1986,6 +2084,7 @@
           createdAt: serverTimestamp()
         });
         setStatusSuccess('Request Received', 'Thanks \u2014 our team will reach out with next steps and a custom quote shortly.');
+        notifyStaff('custom', { type: applicantType, name, email, phone });
       } catch (err) {
         console.error(err);
         setStatusError('Request Not Sent', 'Something went wrong and your request didn\u2019t go through. Please try again.', function () {
@@ -2063,6 +2162,7 @@
         });
 
         setStatusSuccess('Application Received', 'Your documents are in. Our team will review them \u2014 we\u2019ll email you once that\u2019s done.');
+        notifyStaff('licensing', { name: fullName, email, phone });
       } catch (err) {
         console.error(err);
         setStatusError('Submission Failed', 'Something went wrong uploading your documents. Please check your connection and try again.', function () {
@@ -2189,6 +2289,220 @@
       'diploma': 'CGTIA Diploma',
       'higher-diploma': 'CGTIA Higher Diploma'
     };
+
+    /* =====================================================================
+       WALL OF FAME + GRADUATES
+       Shared rendering used across three spots: the full wall-of-fame.html
+       page (podium per year + full graduating class), the home page teaser
+       (latest year's top 3 + a handful of recent graduates), and the
+       Gallery's year-grouped graduation section. All read from the same
+       two collections — wallOfFame and graduates — which staff curate via
+       the Firebase Console.
+       ===================================================================== */
+    async function fetchWallOfFame() {
+      const snap = await getDocs(collection(db, 'wallOfFame'));
+      const items = [];
+      snap.forEach((d) => items.push(d.data()));
+      return items;
+    }
+
+    async function fetchGraduates() {
+      const snap = await getDocs(collection(db, 'graduates'));
+      const items = [];
+      snap.forEach((d) => items.push(d.data()));
+      return items;
+    }
+
+    function groupByYear(items) {
+      const byYear = {};
+      items.forEach((item) => {
+        const y = item.year || 'Unknown';
+        if (!byYear[y]) byYear[y] = [];
+        byYear[y].push(item);
+      });
+      return byYear;
+    }
+
+    function renderPodiumCard(entry, rank) {
+      const rankLabels = { 1: 'Best Graduating Student', 2: '2nd Best Graduating Student', 3: '3rd Best Graduating Student' };
+      const rankStyles = { 1: 'bg-amber-50 border-amber-200 text-amber-900', 2: 'bg-slate-50 border-slate-200 text-slate-700', 3: 'bg-orange-50 border-orange-200 text-orange-900' };
+      const initial = escapeHtml((entry.studentName || '?').charAt(0));
+      const photo = entry.photoUrl
+        ? '<img src="' + escapeHtml(entry.photoUrl) + '" alt="' + escapeHtml(entry.studentName) + '" class="w-full h-full object-cover">'
+        : '<div class="w-full h-full flex items-center justify-center text-4xl font-editorial font-bold text-slate-300">' + initial + '</div>';
+      return (
+        '<div class="soft-component-card rounded-[2.5rem] overflow-hidden border border-white/60' + (rank === 1 ? ' md:scale-105 md:-translate-y-2 shadow-xl' : '') + '">' +
+        '<div class="aspect-square bg-slate-100 overflow-hidden">' + photo + '</div>' +
+        '<div class="p-6">' +
+        '<span class="inline-block px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest mb-3 border ' + rankStyles[rank] + '">' + rankLabels[rank] + '</span>' +
+        '<h3 class="font-editorial text-xl font-bold text-blue-950 mb-1">' + escapeHtml(entry.studentName) + '</h3>' +
+        '<p class="text-xs text-slate-400">' + escapeHtml(entry.program || '') + '</p>' +
+        (entry.quote ? '<p class="text-sm text-slate-500 font-light italic mt-3">\u201c' + escapeHtml(entry.quote) + '\u201d</p>' : '') +
+        '</div></div>'
+      );
+    }
+
+    function renderYearPodium(year, entries) {
+      let cards = '';
+      [1, 2, 3].forEach((rank) => {
+        const entry = entries.find((e) => e.rank === rank);
+        if (entry) cards += renderPodiumCard(entry, rank);
+      });
+      if (!cards) return '';
+      return (
+        '<div class="mb-16 md:mb-20">' +
+        '<h2 class="font-editorial text-2xl md:text-3xl text-blue-950 font-bold mb-8">Class of ' + escapeHtml(year) + '</h2>' +
+        '<div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-end">' + cards + '</div>' +
+        '</div>'
+      );
+    }
+
+    function renderGraduateCard(g) {
+      const initial = escapeHtml((g.studentName || '?').charAt(0));
+      const photo = g.photoUrl
+        ? '<img src="' + escapeHtml(g.photoUrl) + '" alt="' + escapeHtml(g.studentName) + '" class="w-full h-full object-cover">'
+        : '<div class="w-full h-full flex items-center justify-center text-3xl font-editorial font-bold text-slate-300">' + initial + '</div>';
+      return (
+        '<div class="soft-component-card rounded-[2rem] overflow-hidden border border-white/60">' +
+        '<div class="aspect-[4/5] bg-slate-100 overflow-hidden">' + photo + '</div>' +
+        '<div class="p-5">' +
+        '<h4 class="font-editorial text-base font-bold text-blue-950">' + escapeHtml(g.studentName) + '</h4>' +
+        '<p class="text-xs text-slate-400 mb-2">' + escapeHtml(g.program || '') + (g.year ? ' &middot; ' + escapeHtml(g.year) : '') + '</p>' +
+        (g.activity ? '<p class="text-xs text-slate-500 font-light leading-relaxed">' + escapeHtml(g.activity) + '</p>' : '') +
+        '</div></div>'
+      );
+    }
+
+    function renderCompactHonoreeCard(entry, rank) {
+      const rankLabels = { 1: 'Best Graduating Student', 2: '2nd Best', 3: '3rd Best' };
+      const initial = escapeHtml((entry.studentName || '?').charAt(0));
+      const photo = entry.photoUrl
+        ? '<img src="' + escapeHtml(entry.photoUrl) + '" alt="' + escapeHtml(entry.studentName) + '" class="w-full h-full object-cover">'
+        : '<div class="w-full h-full flex items-center justify-center text-2xl font-editorial font-bold text-white/40">' + initial + '</div>';
+      return (
+        '<div class="bg-white/10 rounded-[1.75rem] overflow-hidden border border-white/10">' +
+        '<div class="aspect-square bg-white/5 overflow-hidden">' + photo + '</div>' +
+        '<div class="p-4">' +
+        '<span class="text-[9px] font-bold uppercase tracking-widest text-blue-300 block mb-1">' + rankLabels[rank] + '</span>' +
+        '<h4 class="font-editorial text-sm font-bold text-white">' + escapeHtml(entry.studentName) + '</h4>' +
+        '</div></div>'
+      );
+    }
+
+    async function initWallOfFamePage() {
+      const container = document.getElementById('wallOfFameContainer');
+      const loadingEl = document.getElementById('wallOfFameLoading');
+      try {
+        const items = await fetchWallOfFame();
+        if (loadingEl) loadingEl.classList.add('hidden');
+        if (!items.length) {
+          container.innerHTML = '<p class="text-center text-sm text-slate-400 py-16">Our Wall of Fame is being prepared \u2014 check back soon.</p>';
+        } else {
+          const byYear = groupByYear(items);
+          const years = Object.keys(byYear).sort((a, b) => b - a);
+          let html = '';
+          years.forEach((year) => {
+            const entries = byYear[year].slice().sort((a, b) => (a.rank || 9) - (b.rank || 9));
+            html += renderYearPodium(year, entries);
+          });
+          container.innerHTML = html || '<p class="text-center text-sm text-slate-400 py-16">Our Wall of Fame is being prepared \u2014 check back soon.</p>';
+        }
+      } catch (err) {
+        console.error(err);
+        if (loadingEl) loadingEl.classList.add('hidden');
+        container.innerHTML = '<p class="text-center text-sm text-red-500 py-16">Something went wrong loading the Wall of Fame.</p>';
+      }
+
+      const gradGrid = document.getElementById('graduatesGrid');
+      if (gradGrid) {
+        try {
+          const grads = await fetchGraduates();
+          if (!grads.length) {
+            gradGrid.innerHTML = '<p class="text-center text-sm text-slate-400 py-12 col-span-full">Graduate highlights are coming soon.</p>';
+          } else {
+            grads.sort((a, b) => (b.year || 0) - (a.year || 0));
+            gradGrid.innerHTML = grads.map(renderGraduateCard).join('');
+          }
+        } catch (err) {
+          console.error(err);
+          gradGrid.innerHTML = '<p class="text-center text-sm text-red-500 py-12 col-span-full">Something went wrong loading graduates.</p>';
+        }
+      }
+    }
+
+    async function initHomeWallOfFamePreview() {
+      const previewEl = document.getElementById('homeWallOfFamePreview');
+      if (previewEl) {
+        try {
+          const items = await fetchWallOfFame();
+          if (!items.length) {
+            previewEl.innerHTML = '<p class="text-blue-200 text-sm col-span-full text-center py-6">Our Wall of Fame is being prepared \u2014 check back soon.</p>';
+          } else {
+            const byYear = groupByYear(items);
+            const years = Object.keys(byYear).sort((a, b) => b - a);
+            const latestYear = years[0];
+            const entries = byYear[latestYear].slice().sort((a, b) => (a.rank || 9) - (b.rank || 9));
+            let html = '';
+            [1, 2, 3].forEach((rank) => {
+              const entry = entries.find((e) => e.rank === rank);
+              if (entry) html += renderCompactHonoreeCard(entry, rank);
+            });
+            previewEl.innerHTML = html || '<p class="text-blue-200 text-sm col-span-full text-center py-6">Our Wall of Fame is being prepared \u2014 check back soon.</p>';
+          }
+        } catch (err) {
+          console.error(err);
+          previewEl.innerHTML = '<p class="text-blue-200 text-sm col-span-full text-center py-6">Something went wrong loading honorees.</p>';
+        }
+      }
+
+      const gradPreviewEl = document.getElementById('homeGraduatesPreview');
+      if (gradPreviewEl) {
+        try {
+          const grads = await fetchGraduates();
+          if (!grads.length) {
+            gradPreviewEl.innerHTML = '<p class="text-center text-sm text-slate-400 py-12 col-span-full">Graduate highlights are coming soon.</p>';
+          } else {
+            grads.sort((a, b) => (b.year || 0) - (a.year || 0));
+            gradPreviewEl.innerHTML = grads.slice(0, 8).map(renderGraduateCard).join('');
+          }
+        } catch (err) {
+          console.error(err);
+          gradPreviewEl.innerHTML = '<p class="text-center text-sm text-red-500 py-12 col-span-full">Something went wrong loading graduates.</p>';
+        }
+      }
+    }
+
+    async function initGalleryGraduationSection() {
+      const container = document.getElementById('galleryGraduationContainer');
+      if (!container) return;
+      try {
+        const grads = await fetchGraduates();
+        if (!grads.length) {
+          container.innerHTML = '<p class="text-center text-sm text-slate-400 py-12">Graduation photos are coming soon.</p>';
+          return;
+        }
+        const byYear = groupByYear(grads);
+        const years = Object.keys(byYear).sort((a, b) => b - a);
+        let html = '';
+        years.forEach((year) => {
+          const entries = byYear[year];
+          html +=
+            '<div class="mb-14">' +
+            '<h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold mb-6">Class of ' + escapeHtml(year) + '</h3>' +
+            '<div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6">' +
+            entries.map(renderGraduateCard).join('') +
+            '</div></div>';
+        });
+        container.innerHTML = html;
+      } catch (err) {
+        console.error(err);
+        container.innerHTML = '<p class="text-center text-sm text-red-500 py-12">Something went wrong loading graduation photos.</p>';
+      }
+    }
+
+    if (document.getElementById('wallOfFameContainer')) initWallOfFamePage();
+    if (document.getElementById('homeWallOfFamePreview')) initHomeWallOfFamePreview();
+    if (document.getElementById('galleryGraduationContainer')) initGalleryGraduationSection();
   </script>
 
 

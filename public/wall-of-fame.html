@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CGTIA — Caregiver Training & Internship Academy | Imo State, Nigeria</title>
-  <meta name="description" content="CGTIA (Caregivers Training & Internship Academy) trains caregivers Nigeria and the diaspora can rely on — hands-on caregiver training, clinical practice, and guided internship placement in Imo State, Nigeria.">
+  <title>Wall of Fame — CGTIA Top Graduating Students</title>
+  <meta name="description" content="CGTIA's Wall of Fame — celebrating our best graduating students each year, and the wider graduating class.">
   <meta name="keywords" content="caregiver training Nigeria, caregiving academy, CGTIA, Caregivers Training and Internship Academy, caregiver certification Nigeria, caregiver training Imo State, professional caregiver course, home health aide training Nigeria, elderly care training Nigeria, nanny training Nigeria">
-  <link rel="canonical" href="https://cgtia.org/index.html">
+  <link rel="canonical" href="https://cgtia.org/wall-of-fame.html">
 
   <!-- Geo / local SEO signals — Imo State, Nigeria, but discoverable globally
        (relevant for the Nigerian diaspora searching from abroad too) -->
@@ -18,17 +18,17 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="CGTIA — Caregiver Training & Internship Academy | Imo State, Nigeria">
-  <meta property="og:description" content="CGTIA (Caregivers Training & Internship Academy) trains caregivers Nigeria and the diaspora can rely on — hands-on caregiver training, clinical practice, and guided internship placement in Imo State, Nigeria.">
-  <meta property="og:url" content="https://cgtia.org/index.html">
+  <meta property="og:title" content="Wall of Fame — CGTIA Top Graduating Students">
+  <meta property="og:description" content="CGTIA's Wall of Fame — celebrating our best graduating students each year, and the wider graduating class.">
+  <meta property="og:url" content="https://cgtia.org/wall-of-fame.html">
   <meta property="og:image" content="https://cgtia.org/og-image.jpg">
   <meta property="og:site_name" content="CGTIA">
   <meta property="og:locale" content="en_NG">
 
   <!-- Twitter / X Card (also used by WhatsApp/Telegram link previews) -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CGTIA — Caregiver Training & Internship Academy | Imo State, Nigeria">
-  <meta name="twitter:description" content="CGTIA (Caregivers Training & Internship Academy) trains caregivers Nigeria and the diaspora can rely on — hands-on caregiver training, clinical practice, and guided internship placement in Imo State, Nigeria.">
+  <meta name="twitter:title" content="Wall of Fame — CGTIA Top Graduating Students">
+  <meta name="twitter:description" content="CGTIA's Wall of Fame — celebrating our best graduating students each year, and the wider graduating class.">
   <meta name="twitter:image" content="https://cgtia.org/og-image.jpg">
 
   <!-- Structured data so Google can understand exactly who we are, not
@@ -43,7 +43,7 @@
     "alternateName": ["Caregivers Training & Internship Academy", "Caregivers Training and Internship Academy Limited"],
     "url": "https://cgtia.org/index.html",
     "logo": "https://cgtia.org/og-image.jpg",
-    "description": "CGTIA (Caregivers Training & Internship Academy) trains caregivers Nigeria and the diaspora can rely on — hands-on caregiver training, clinical practice, and guided internship placement in Imo State, Nigeria.",
+    "description": "CGTIA's Wall of Fame — celebrating our best graduating students each year, and the wider graduating class.",
     "address": {
       "@type": "PostalAddress",
       "addressRegion": "Imo State",
@@ -63,8 +63,9 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://js.paystack.co/v1/inline.js" defer></script>
   <style>
+
     @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap');
-    
+
     .font-editorial { font-family: 'Playfair Display', serif; }
     .font-sans-clean { font-family: 'Plus Jakarta Sans', sans-serif; }
 
@@ -74,7 +75,7 @@
 
     .mesh-gradient-canvas {
       background-color: #ffffff;
-      background-image: 
+      background-image:
         radial-gradient(at 10% 20%, rgba(219, 234, 254, 0.45) 0px, transparent 45%),
         radial-gradient(at 90% 10%, rgba(241, 245, 249, 0.75) 0px, transparent 40%),
         radial-gradient(at 50% 50%, rgba(226, 232, 240, 0.5) 0px, transparent 50%),
@@ -94,14 +95,14 @@
       background: rgba(255, 255, 255, 0.6);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
-      box-shadow: 
+      box-shadow:
         inset 0 1.5px 2px rgba(255, 255, 255, 0.8),
         0 15px 35px -10px rgba(148, 163, 184, 0.08);
     }
 
     .soft-component-card:hover {
       background: rgba(255, 255, 255, 0.85);
-      box-shadow: 
+      box-shadow:
         inset 0 1.5px 3px rgba(255, 255, 255, 1),
         0 25px 50px -10px rgba(148, 163, 184, 0.12);
     }
@@ -110,9 +111,9 @@
       position: sticky;
       top: 0;
       z-index: 50;
-      background: linear-gradient(to bottom, 
-        rgba(255, 255, 255, 0.96) 0%, 
-        rgba(255, 255, 255, 0.8) 60%, 
+      background: linear-gradient(to bottom,
+        rgba(255, 255, 255, 0.96) 0%,
+        rgba(255, 255, 255, 0.8) 60%,
         rgba(255, 255, 255, 0) 100%
       );
       backdrop-filter: blur(8px);
@@ -131,208 +132,53 @@
       pointer-events: none;
     }
 
-    /* --- 3D ARC CAROUSEL MECHANICAL INFRASTRUCTURE --- */
-    .arc-viewport-perspective {
-      perspective: 1400px;
-      transform-style: preserve-3d;
+    @property --gradient-angle {
+      syntax: "<angle>";
+      initial-value: 0deg;
+      inherits: false;
     }
-    
-    .program-arc-track {
-      transform-style: preserve-3d;
+
+    .morph-nav-pill {
+      width: 0px;
+      opacity: 0;
+      pointer-events: none;
       position: relative;
+      transition: width 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    .program-card-node {
-      transition: all 0.7s cubic-bezier(0.25, 1, 0.5, 1);
-      transform-style: preserve-3d;
-      will-change: transform, opacity;
-    }
-
-    .program-card-node.state-center {
-      transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+    .morph-nav-pill.state-expanded {
+      width: 180px;
       opacity: 1;
-      z-index: 10;
-      pointer-events: auto;
     }
 
-    .program-card-node.state-left-prev {
-      transform: translate3d(-32%, 0, -200px) rotateY(28deg) scale(0.85);
-      opacity: 0.35;
-      z-index: 4;
-      pointer-events: auto;
-    }
-
-    .program-card-node.state-right-next {
-      transform: translate3d(32%, 0, -200px) rotateY(-28deg) scale(0.85);
-      opacity: 0.35;
-      z-index: 4;
-      pointer-events: auto;
-    }
-
-    .program-card-node.state-stowed-left {
-      transform: translate3d(-60%, 0, -400px) rotateY(45deg) scale(0.7);
-      opacity: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .program-card-node.state-stowed-right {
-      transform: translate3d(60%, 0, -400px) rotateY(-45deg) scale(0.7);
-      opacity: 0;
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    /* --- SAAS AUTOMATED DUAL MARQUEE --- */
-    @keyframes marqueeLeft {
-      0% { transform: translate3d(0, 0, 0); }
-      100% { transform: translate3d(-50%, 0, 0); }
-    }
-
-    @keyframes marqueeRight {
-      0% { transform: translate3d(-50%, 0, 0); }
-      100% { transform: translate3d(0, 0, 0); }
-    }
-
-    .animate-marquee-left {
-      display: flex;
-      width: max-content;
-      animation: marqueeLeft 28s linear infinite;
-    }
-
-    .animate-marquee-right {
-      display: flex;
-      width: max-content;
-      animation: marqueeRight 28s linear infinite;
-    }
-
-    .marquee-container:hover .animate-marquee-left,
-    .marquee-container:hover .animate-marquee-right {
-      animation-play-state: paused;
-    }
-
-    .saas-edge-mask {
-      mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 15%, black 85%, transparent 100%);
-    }
-
-    /* --- EXPANDING GALLERY --- */
-    .peel-gallery-container {
-      display: flex;
-      width: 100%;
-      gap: 1.25rem;
-      height: 480px;
-    }
-
-    .peel-card {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      border-radius: 9999px;
-      transition: flex 0.85s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.75s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-
-    .peel-gallery-container:hover .peel-card:hover {
-      flex: 3.8;
-      border-radius: 2.5rem;
-    }
-
-    /* Click/tap-driven state — authoritative on all devices, since iOS
-       Safari doesn't reliably trigger :hover on tap the way Android does. */
-    .peel-card.peel-active {
-      flex: 3.8;
-      border-radius: 2.5rem;
-    }
-
-    .peel-image-wrapper {
+    .morph-nav-pill::before {
+      content: '';
       position: absolute;
       inset: 0;
-      width: 100%;
-      height: 100%;
+      border-radius: inherit;
+      padding: 1.5px;
+      background: conic-gradient(from var(--gradient-angle),
+          transparent 40%,
+          rgba(147, 197, 253, 0.3) 65%,
+          #3b82f6 80%,
+          #ffffff 95%,
+          #3b82f6 100%);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0;
+      pointer-events: none;
     }
 
-    .peel-image-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scale(1.05);
-      transition: transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+    .morph-nav-pill.state-expanded::before {
+      opacity: 1;
+      animation: traceCapsuleEdge 1.8s linear infinite;
     }
 
-    .peel-card:hover .peel-image-wrapper img,
-    .peel-card.peel-active .peel-image-wrapper img {
-      transform: scale(1);
+    @keyframes traceCapsuleEdge {
+      0% { --gradient-angle: 0deg; }
+      100% { --gradient-angle: 360deg; }
     }
-
-    .peel-card.peel-active .peel-overlay {
-      opacity: 1 !important;
-    }
-    
-
-/* --- OPTIMIZED FLUID GRADIENT TRACK GLOW INFRASTRUCTURE --- */
-
-/* 1. Define the custom angle property for hardware-accelerated interpolation */
-@property --gradient-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-.morph-nav-pill {
-  width: 0px;
-  opacity: 0;
-  pointer-events: none;
-  position: relative;
-  /* Lock absolute path coordinates */
-  transition: width 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.morph-nav-pill.state-expanded {
-  width: 180px;
-  opacity: 1;
-}
-
-/* Structural Comet Engine */
-.morph-nav-pill::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1.5px;
-  /* Defines the precise stroke thickness of the border */
-  
-  /* 2. Bind the custom property to the conic gradient */
-  background: conic-gradient(from var(--gradient-angle),
-      transparent 40%,
-      rgba(147, 197, 253, 0.3) 65%,
-      #3b82f6 80%,
-      #ffffff 95%,
-      #3b82f6 100%);
-  
-  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
-  mask-composite: exclude;
-  opacity: 0;
-  pointer-events: none;
-}
-
-/* Active State Dispatcher */
-.morph-nav-pill.state-expanded::before {
-  opacity: 1;
-  animation: traceCapsuleEdge 1.8s linear infinite;
-}
-
-/* 3. Animate the mathematical property, not the background string */
-@keyframes traceCapsuleEdge {
-  0% {
-    --gradient-angle: 0deg;
-  }
-  
-  100% {
-    --gradient-angle: 360deg;
-  }
-}
 
     /* --- SUBMISSION STATUS SHEET ANIMATIONS --- */
     .status-icon-pop {
@@ -380,6 +226,8 @@
       80% { transform: translateX(3px); }
     }
 
+    /* Perf: contain paint/layout on the many glass cards so the browser doesn't
+       repaint the whole page whenever one card's blur/shadow updates */
     .soft-component-card { contain: layout style paint; }
 
     @media (prefers-reduced-motion: reduce) {
@@ -392,6 +240,11 @@
       }
     }
 
+    /* Perf: an animated gradient background combined with heavy blur is the
+       classic combo that causes jank on lower-powered Android WebViews (iOS
+       Safari's compositor handles it far better). On small/mobile screens,
+       freeze the background drift and cut blur further so it stays smooth
+       everywhere, not just on iOS. */
     @media (max-width: 768px) {
       .mesh-gradient-canvas {
         animation: none;
@@ -403,15 +256,6 @@
       }
     }
 
-    /* Masonry Layout Setup */
-    .masonry-layout-column-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      grid-gap: 2rem;
-      grid-auto-flow: dense;
-    }
-    .masonry-row-span-tall { grid-row: span 2; }
-    .masonry-row-span-short { grid-row: span 1; }
   </style>
 </head>
 <body class="mesh-gradient-canvas font-sans-clean text-slate-900 overflow-x-hidden min-h-screen selection:bg-blue-100 pb-24 md:pb-0">
@@ -419,16 +263,16 @@
   <!-- Faded Sticky Header -->
   <header class="faded-sticky-header w-full smooth-transition">
     <div class="w-full max-w-7xl mx-auto px-6 py-8 flex justify-between items-center">
-      <span class="font-editorial text-xl md:text-2xl font-bold tracking-tight text-blue-950">CGTIA.</span>
+      <a href="index.html" data-pill-label="Home" class="font-editorial text-xl md:text-2xl font-bold tracking-tight text-blue-950">CGTIA.</a>
       <nav class="hidden md:flex space-x-7 text-xs font-semibold tracking-widest uppercase text-slate-500">
-        <a href="index.html" class="text-blue-950 hover:text-blue-950 smooth-transition">Home</a>
+        <a href="index.html" class="hover:text-blue-950 smooth-transition">Home</a>
         <a href="about.html" class="hover:text-blue-950 smooth-transition">About</a>
         <a href="programs.html" class="hover:text-blue-950 smooth-transition">Programs</a>
         <a href="gallery.html" class="hover:text-blue-950 smooth-transition">Gallery</a>
         <a href="tuition.html" class="hover:text-blue-950 smooth-transition">Tuition</a>
         <a href="contact.html" class="hover:text-blue-950 smooth-transition">Contact</a>
       </nav>
-      
+
       <!-- Desktop Interface Control Matrix -->
       <div class="hidden md:flex items-center space-x-8">
         <a href="#" onclick="toggleAuthScreen('signin'); return false;" class="text-xs font-semibold tracking-widest uppercase text-slate-500 hover:text-blue-950 smooth-transition">Portal</a>
@@ -437,640 +281,42 @@
         </button>
       </div>
 
-      <!-- Mobile Structural Adaption (Immediate Action Visibility Stack) -->
+      <!-- Mobile Structural Adaption -->
       <button onclick="toggleApplyScreen()" class="block md:hidden bg-blue-950 text-white px-5 py-2 rounded-full text-[11px] font-medium tracking-wider uppercase shadow-md active:scale-95 transition-transform">
         Apply
       </button>
     </div>
   </header>
 
-  <!-- Hero Workspace -->
-  <section class="w-full max-w-5xl mx-auto px-6 pt-16 md:pt-24 pb-28 md:pb-36 text-center">
-    <span class="text-xs font-bold tracking-widest text-blue-800 uppercase block mb-6 opacity-0 animate-[fadeIn_1s_ease-out_0.2s_forwards]">Enrolling Now / 2026 Cohort</span>
-    <h1 class="font-editorial text-4xl sm:text-6xl md:text-8xl text-blue-950 font-bold tracking-tight leading-[1.1] md:leading-[1.05] mb-8 md:mb-10 opacity-0 blur-md animate-[blurFadeIn_1.6s_cubic-bezier(0.16,1,0.3,1)_0.3s_forwards]">
-      Compassionate care begins <br class="hidden sm:inline"><span class="italic font-normal text-blue-900/90">with real training</span>.
-    </h1>
-    <p class="max-w-2xl mx-auto text-slate-500 text-base md:text-xl font-light leading-relaxed mb-10 md:mb-14 opacity-0 animate-[fadeIn_1.2s_ease-out_0.7s_forwards]">
-      Caregivers Training & Internship Academy Limited (CGTIA) equips everyday people with certified caregiving skills, hands-on clinical practice, and guided internship placements — building careers rooted in dignity and care.
-    </p>
-    <div class="opacity-0 animate-[fadeIn_1.2s_ease-out_0.9s_forwards]">
-      <button onclick="toggleApplyScreen()" class="bg-blue-950 text-white px-9 py-4 rounded-full text-sm font-medium tracking-wide shadow-2xl shadow-blue-950/10 hover:shadow-blue-950/20 hover:scale-[1.015] smooth-transition">
-        Apply for Admission
-      </button>
-    </div>
+  <!-- Hero -->
+  <section class="w-full max-w-4xl mx-auto px-6 pt-16 md:pt-24 pb-10 md:pb-14 text-center">
+    <span class="text-xs font-bold tracking-widest text-blue-800 uppercase block mb-6">Honor Roll</span>
+    <h1 class="font-editorial text-4xl sm:text-6xl md:text-7xl text-blue-950 font-bold tracking-tight leading-[1.1] mb-6">Wall of Fame</h1>
+    <p class="text-slate-500 text-base md:text-xl font-light leading-relaxed">Celebrating our best graduating students, year by year &mdash; and the wider class that walked with them.</p>
   </section>
 
-  <!-- Philosophy Narrative -->
-  <section class="w-full max-w-7xl mx-auto px-6 pb-28 md:pb-40">
-    <div class="w-full border-t border-slate-200/60 pt-12 md:pt-16 flex flex-col md:flex-row justify-between items-start gap-8 md:gap-12">
-      <div class="w-full md:w-1/3">
-        <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold leading-tight">Our Approach to Caregiving Education</h2>
+  <!-- Top 3 Podium, grouped by year -->
+  <section class="w-full max-w-6xl mx-auto px-6 pb-20 md:pb-28">
+    <div id="wallOfFameLoading" class="text-center py-16">
+      <div class="w-8 h-8 mx-auto" style="animation: statusSpin 0.85s linear infinite;">
+        <svg viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2.5" stroke-opacity="0.15" class="text-blue-900"/>
+          <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" class="text-blue-900"/>
+        </svg>
       </div>
-      <div class="w-full md:w-2/3 text-slate-500 font-light text-base md:text-lg leading-relaxed">
-        <p>Caregiving is a skill that deserves proper training, not just good intentions. CGTIA blends structured classroom learning with hands-on clinical practice and supervised internships, so every graduate leaves ready to provide safe, competent, and compassionate care — whether in a client's home, a care facility, or a hospital setting.</p>
-      </div>
+      <p class="text-sm text-slate-400 mt-4">Loading the Wall of Fame&hellip;</p>
     </div>
+    <div id="wallOfFameContainer"></div>
   </section>
 
-  <!-- Curated Structures Grid Section -->
-  <section class="w-full max-w-7xl mx-auto px-6 pb-32">
-    <div class="text-left mb-12 md:mb-16">
-      <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3">Why CGTIA</span>
-      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Built Around Real Practice</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 md:gap-8 auto-rows-auto md:auto-rows-[18rem]">
-      <div class="md:col-span-5 md:row-span-2 soft-component-card p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] flex flex-col justify-between gap-8 group smooth-transition cursor-pointer">
-        <div>
-          <span class="text-xs font-bold tracking-widest text-blue-800 uppercase block mb-6">01 / Practice</span>
-          <h3 class="font-editorial text-2xl md:text-4xl text-blue-950 font-bold mb-4 group-hover:translate-x-1.5 smooth-transition leading-tight">Hands-On Clinical Training</h3>
-        </div>
-        <p class="text-slate-500 font-light text-sm md:text-base leading-relaxed">Every module pairs classroom instruction with supervised practical sessions, so students build real confidence in moving & handling, hygiene, and daily-care routines before they ever meet a client.</p>
-      </div>
-
-      <div class="md:col-span-7 md:row-span-1 soft-component-card p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] flex flex-col justify-between gap-6 group smooth-transition cursor-pointer">
-        <div class="flex justify-between items-start gap-4">
-          <h3 class="font-editorial text-2xl md:text-3xl text-blue-950 font-bold group-hover:translate-x-1.5 smooth-transition leading-tight">Guided Internship Placement</h3>
-          <span class="text-xs font-bold tracking-widest text-slate-400 uppercase pt-1.5 shrink-0">02 / Placement</span>
-        </div>
-        <p class="text-slate-500 font-light text-sm md:text-base max-w-xl">Graduates are matched with partner care homes, clinics, and private households for supervised internships, easing the transition from student to working caregiver.</p>
-      </div>
-
-      <div class="md:col-span-3 md:row-span-1 soft-component-card p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] flex flex-col justify-between gap-6 group smooth-transition cursor-pointer">
-        <div>
-          <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-4">03 / Flexible</span>
-          <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold group-hover:translate-x-1.5 smooth-transition">Study on WhatsApp</h3>
-        </div>
-        <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Diploma coursework and reading materials delivered directly to your phone, so learning fits around work and family life.</p>
-      </div>
-
-      <div class="md:col-span-4 md:row-span-1 soft-component-card p-8 md:p-10 rounded-[2.5rem] md:rounded-[3rem] flex flex-col justify-between gap-6 group smooth-transition cursor-pointer">
-        <div>
-          <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-4">04 / Certified</span>
-          <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold group-hover:translate-x-1.5 smooth-transition">Recognized Certification</h3>
-        </div>
-        <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Every graduate receives a CGTIA diploma covering caregiving fundamentals, food hygiene, and safe patient handling.</p>
-      </div>
-
-      <div class="md:col-span-12 md:row-span-1 soft-component-card p-8 md:p-12 rounded-[2.5rem] md:rounded-[3rem] flex flex-col md:flex-row justify-between items-start md:items-center group smooth-transition cursor-pointer gap-6">
-        <div class="max-w-xl">
-          <span class="text-xs font-bold tracking-widest text-blue-800 uppercase block mb-3">05 / Pathway</span>
-          <h3 class="font-editorial text-2xl md:text-3xl text-blue-950 font-bold mb-2 group-hover:translate-x-1.5 smooth-transition">From Student to Certified Caregiver</h3>
-          <p class="text-slate-500 font-light text-sm md:text-base">Coursework, clinical practice, exams, and internship placement — one clear pathway from enrollment to a confident, job-ready caregiving career.</p>
-        </div>
-        <button onclick="toggleApplyScreen()" class="bg-blue-950 text-white px-7 py-3.5 rounded-full text-xs font-semibold tracking-widest uppercase shadow-xl hover:scale-105 smooth-transition shrink-0">
-          Start Your Application
-        </button>
-      </div>
-    </div>
-  </section>
-
-   <!-- NEW SECTION: Tuition & Program Fees -->
-  <section id="tuition" class="w-full max-w-7xl mx-auto px-6 pb-36">
-    <div class="text-left mb-12 md:mb-16">
-      <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3">Tuition Options</span>
-      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Straightforward Program Fees</h2>
-    </div>
-
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">
-      
-      <!-- Tier 1: Orientation -->
-      <div class="soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/60 flex flex-col justify-between group smooth-transition">
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div>
-              <h3 class="font-editorial text-xl font-bold text-blue-950">Orientation Track</h3>
-              <p class="text-xs text-slate-400 mt-1">For first-time applicants</p>
-            </div>
-            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase px-3 py-1 bg-white/50 rounded-full">Intro</span>
-          </div>
-          <div class="my-8">
-            <span class="font-editorial text-5xl font-bold text-blue-950 tracking-tight">Free</span>
-            <span class="text-xs text-slate-400 ml-2 uppercase tracking-wider">Info Session</span>
-          </div>
-          <ul class="space-y-4 pt-6 border-t border-slate-200/40 text-sm text-slate-500 font-light">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Academy Overview & Q&A
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Curriculum Walkthrough
-            </li>
-            <li class="flex items-center gap-3 opacity-40 line-through">
-              <span class="w-1.5 h-1.5 rounded-full bg-slate-300"></span> Clinical Practice Access
-            </li>
-          </ul>
-        </div>
-        <button onclick="toggleApplyScreen()" class="w-full mt-10 py-4 rounded-full border border-slate-200 text-xs font-semibold tracking-widest uppercase text-slate-700 hover:bg-slate-950 hover:text-white smooth-transition">
-          Reserve a Seat
-        </button>
-      </div>
-
-      <!-- Tier 2: Caregiver Certificate -->
-      <div class="bg-white/90 backdrop-blur-2xl rounded-[2.5rem] p-8 md:p-10 border-2 border-blue-900/10 flex flex-col justify-between shadow-xl relative scale-100 md:scale-[1.03] group smooth-transition z-10">
-        <div class="absolute -top-3.5 right-8 bg-blue-950 text-white text-[9px] font-bold tracking-widest uppercase px-4 py-1.5 rounded-full shadow-md">
-          Most Popular
-        </div>
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div>
-              <h3 class="font-editorial text-xl font-bold text-blue-950">Certificate</h3>
-              <p class="text-xs text-blue-900/60 mt-1">Beginners training + Clinical placement</p>
-            </div>
-            <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase px-3 py-1 bg-blue-50 rounded-full">Core</span>
-          </div>
-          <div class="my-8">
-            <span class="font-editorial text-5xl font-bold text-blue-950 tracking-tight">₦300k</span>
-            <span class="text-xs text-slate-400 ml-2 uppercase tracking-wider">/ Full Program</span>
-          </div>
-          <ul class="space-y-4 pt-6 border-t border-slate-200/40 text-sm text-slate-600 font-light">
-            <li class="flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-blue-600 shadow-sm"></span> Full Caregiving Curriculum
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-blue-600 shadow-sm"></span> 16 Course Modules
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-blue-600 shadow-sm"></span> Guided Clinical Placement
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-2 h-2 rounded-full bg-blue-600 shadow-sm"></span> CGTIA Certificate 
-            </li>
-          </ul>
-        </div>
-        <button onclick="toggleApplyScreen()" class="w-full mt-10 py-4 rounded-full bg-blue-950 text-white text-xs font-semibold tracking-widest uppercase shadow-lg shadow-blue-950/20 hover:bg-blue-900 smooth-transition">
-          Apply for This Program
-        </button>
-      </div>
-        
-        
-        
-              <!-- Tier 3: Certified Diploma in Caregiving -->
-      <div class="soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/60 flex flex-col justify-between group smooth-transition">
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div>
-              <h3 class="font-editorial text-xl font-bold text-blue-950">Diploma</h3>
-              <p class="text-xs text-slate-400 mt-1">Advanced + Nanny training</p>
-            </div>
-            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase px-3 py-1 bg-white/50 rounded-full">Level 2</span>
-          </div>
-          <div class="my-8">
-            <span class="font-editorial text-5xl font-bold text-blue-950 tracking-tight">₦350k</span>
-            <span class="text-xs text-slate-400 ml-2 uppercase tracking-wider">/ Advanced program </span>
-          </div>
-          <ul class="space-y-4 pt-6 border-t border-slate-200/40 text-sm text-slate-500 font-light">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Level 1 Certification 
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> 12 Course modules
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Nanny training 
-            </li>
-          </ul>
-        </div>
-        <button class="w-full mt-10 py-4 rounded-full border border-slate-200 text-xs font-semibold tracking-widest uppercase text-slate-700 hover:bg-slate-950 hover:text-white smooth-transition">
-          Apply for this program
-        </button>
-        </div>
-        
-        
-        
-              <!-- Tier 4: CGTIA Higher Diploma Certificate -->
-      <div class="soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/60 flex flex-col justify-between group smooth-transition">
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div>
-              <h3 class="font-editorial text-xl font-bold text-blue-950"> Higher Diploma</h3>
-              <p class="text-xs text-slate-400 mt-1">Proficiency + Leadership skill</p>
-            </div>
-            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase px-3 py-1 bg-white/50 rounded-full">Level 3</span>
-          </div>
-          <div class="my-8">
-            <span class="font-editorial text-5xl font-bold text-blue-950 tracking-tight">₦400k</span>
-            <span class="text-xs text-slate-400 ml-2 uppercase tracking-wider">/ Proficiency program</span>
-          </div>
-          <ul class="space-y-4 pt-6 border-t border-slate-200/40 text-sm text-slate-500 font-light">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> On-Site Staff Training
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Bulk Enrollment Pricing
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Dedicated Program Coordinator
-            </li>
-          </ul>
-        </div>
-        <button class="w-full mt-10 py-4 rounded-full border border-slate-200 text-xs font-semibold tracking-widest uppercase text-slate-700 hover:bg-slate-950 hover:text-white smooth-transition">
-          Apply for this program
-        </button>
-        </div>
-        
-        
-        
-              <!-- Tier 4: CGTIA Licensing -->
-      <div class="soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/60 flex flex-col justify-between group smooth-transition">
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div>
-              <h3 class="font-editorial text-xl font-bold text-blue-950"> Licensing</h3>
-              <p class="text-xs text-slate-400 mt-1">For qualified individuals</p>
-            </div>
-            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase px-3 py-1 bg-white/50 rounded-full">License</span>
-          </div>
-          <div class="my-8">
-            <span class="font-editorial text-5xl font-bold text-blue-950 tracking-tight">₦150k</span>
-            <span class="text-xs text-slate-400 ml-2 uppercase tracking-wider"><br>Below are the <span>Requirements</span></span>
-          </div>
-          <ul class="space-y-4 pt-6 border-t border-slate-200/40 text-sm text-slate-500 font-light">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span>Must have undergone basic caregiver training in a reputable institution.
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Submission of proof of training.
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Must have mandatory lifesaving certifications.
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Basic literacy and communication benchmark. 
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Must have completed 72hours of clinical placement with certificate of completion.
-            </li>
-          </ul>
-        </div>
-        <button onclick="navigateWithPill('Licensing', 'licensing.html')" class="w-full mt-10 py-4 rounded-full border border-slate-200 text-xs font-semibold tracking-widest uppercase text-slate-700 hover:bg-slate-950 hover:text-white smooth-transition">
-          Apply for licensing
-        </button>
-        </div>
-        
-        
-        
-        
-
-      <!-- Tier 3: Institutional / Corporate Training -->
-      <div class="soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/60 flex flex-col justify-between group smooth-transition">
-        <div>
-          <div class="flex justify-between items-start mb-6">
-            <div>
-              <h3 class="font-editorial text-xl font-bold text-blue-950">Institutional Training</h3>
-              <p class="text-xs text-slate-400 mt-1">For hospitals & care homes</p>
-            </div>
-            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase px-3 py-1 bg-white/50 rounded-full">Custom</span>
-          </div>
-          <div class="my-8">
-            <span class="font-editorial text-5xl font-bold text-blue-950 tracking-tight">Custom</span>
-            <span class="text-xs text-slate-400 ml-2 uppercase tracking-wider">Quoted per Cohort</span>
-          </div>
-          <ul class="space-y-4 pt-6 border-t border-slate-200/40 text-sm text-slate-500 font-light">
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> On-Site Staff Training
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Bulk Enrollment Pricing
-            </li>
-            <li class="flex items-center gap-3">
-              <span class="w-1.5 h-1.5 rounded-full bg-blue-400"></span> Dedicated Program Coordinator
-            </li>
-          </ul>
-        </div>
-        <button onclick="navigateWithPill('Institutional Partnerships', 'custom.html')" class="w-full mt-10 py-4 rounded-full border border-slate-200 text-xs font-semibold tracking-widest uppercase text-slate-700 hover:bg-slate-950 hover:text-white smooth-transition">
-          Contact Admissions
-        </button>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- SaaS Automated Dual-Track Marquee Section -->
-  <section class="w-full pb-32 overflow-hidden marquee-container">
-    <div class="w-full max-w-7xl mx-auto px-6 mb-12">
-      <div class="w-full border-t border-slate-200/50 pt-12">
-        <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-2">Clinical Network</span>
-        <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Internship & Placement Partners</h2>
-      </div>
-    </div>
-
-    <div class="saas-edge-mask w-full flex flex-col gap-10 py-2 select-none">
-      <div class="w-full overflow-hidden flex">
-        <div class="animate-marquee-left gap-20 items-center px-4">
-          <span class="font-editorial text-2xl font-bold tracking-tight text-blue-950/80 hover:text-blue-950 cursor-pointer transition-colors duration-300">Grace Haven Care Home</span>
-          <span class="font-sans-clean text-lg font-light tracking-[0.25em] uppercase text-slate-700/80 hover:text-slate-900 cursor-pointer transition-colors duration-300">RADIANT HEALTH CLINIC</span>
-          <span class="font-editorial italic text-2xl tracking-wide text-blue-900/70 hover:text-blue-900 cursor-pointer transition-colors duration-300">Wellspring Nursing Services</span>
-          <span class="font-sans-clean text-xs font-bold tracking-[0.4em] uppercase text-slate-600/80 hover:text-slate-900 cursor-pointer transition-colors duration-300">ST. JUDE MEDICAL CENTER</span>
-          <span class="font-editorial text-2xl font-semibold tracking-tighter text-slate-800/80 hover:text-slate-950 cursor-pointer transition-colors duration-300">Comfort Hands Agency</span>
-          
-          <span class="font-editorial text-2xl font-bold tracking-tight text-blue-950/80 hover:text-blue-950 cursor-pointer transition-colors duration-300">Grace Haven Care Home</span>
-          <span class="font-sans-clean text-lg font-light tracking-[0.25em] uppercase text-slate-700/80 hover:text-slate-900 cursor-pointer transition-colors duration-300">RADIANT HEALTH CLINIC</span>
-          <span class="font-editorial italic text-2xl tracking-wide text-blue-900/70 hover:text-blue-900 cursor-pointer transition-colors duration-300">Wellspring Nursing Services</span>
-          <span class="font-sans-clean text-xs font-bold tracking-[0.4em] uppercase text-slate-600/80 hover:text-slate-900 cursor-pointer transition-colors duration-300">ST. JUDE MEDICAL CENTER</span>
-          <span class="font-editorial text-2xl font-semibold tracking-tighter text-slate-800/80 hover:text-slate-950 cursor-pointer transition-colors duration-300">Comfort Hands Agency</span>
-        </div>
-      </div>
-
-      <div class="w-full overflow-hidden flex">
-        <div class="animate-marquee-right gap-20 items-center px-4">
-          <span class="font-sans-clean text-xs font-bold tracking-[0.35em] uppercase text-slate-700/80 hover:text-slate-950 cursor-pointer transition-colors duration-300">ELDER BRIDGE FOUNDATION</span>
-          <span class="font-editorial text-2xl font-bold italic tracking-tight text-blue-950/70 hover:text-blue-950 cursor-pointer transition-colors duration-300">HopeCare Multispecialty</span>
-          <span class="font-sans-clean text-base font-medium tracking-widest uppercase text-slate-600/80 hover:text-slate-900 cursor-pointer transition-colors duration-300">Mainland Home Health</span>
-          <span class="font-editorial text-2xl font-light tracking-tight text-blue-900/80 hover:text-blue-950 cursor-pointer transition-colors duration-300">Serenity Elder Care</span>
-          <span class="font-sans-clean text-xs font-bold tracking-[0.5em] uppercase text-slate-500/70 hover:text-slate-800 cursor-pointer transition-colors duration-300">TRUSTLINE CLINICS</span>
-          
-          <span class="font-sans-clean text-xs font-bold tracking-[0.35em] uppercase text-slate-700/80 hover:text-slate-950 cursor-pointer transition-colors duration-300">ELDER BRIDGE FOUNDATION</span>
-          <span class="font-editorial text-2xl font-bold italic tracking-tight text-blue-950/70 hover:text-blue-950 cursor-pointer transition-colors duration-300">HopeCare Multispecialty</span>
-          <span class="font-sans-clean text-base font-medium tracking-widest uppercase text-slate-600/80 hover:text-slate-900 cursor-pointer transition-colors duration-300">Mainland Home Health</span>
-          <span class="font-editorial text-2xl font-light tracking-tight text-blue-900/80 hover:text-blue-950 cursor-pointer transition-colors duration-300">Serenity Elder Care</span>
-          <span class="font-sans-clean text-xs font-bold tracking-[0.5em] uppercase text-slate-500/70 hover:text-slate-800 cursor-pointer transition-colors duration-300">TRUSTLINE CLINICS</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Masonry Post Card Grid Workspace -->
-  <section class="w-full max-w-7xl mx-auto px-6 pb-36">
-    <div class="text-left mb-12">
-      <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3">Caregiver Resources</span>
-      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Insights & Training Notes</h2>
-    </div>
-
-    <div class="masonry-layout-column-grid">
-      <div class="masonry-row-span-tall soft-component-card rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden border border-white/60 shadow-md group smooth-transition">
-        <div class="w-full h-64 rounded-2xl overflow-hidden mb-6 relative">
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&w=800&q=80" alt="Caregiving students practicing patient handling techniques">
-        </div>
-        <div class="flex-grow flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase">Module Focus</span>
-              <span class="text-xs text-slate-400 font-light">July 2026</span>
-            </div>
-            <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold leading-tight mb-3">Safe Moving & Handling Basics</h3>
-            <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed mb-4">A practical look at the techniques every caregiver needs to safely assist clients with limited mobility, protecting both caregiver and client from injury.</p>
-          </div>
-          <div class="pt-4 border-t border-slate-200/40 flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-700">Read Guide</span>
-            <div class="w-8 h-8 rounded-full bg-blue-950 flex items-center justify-center text-white text-xs">&rarr;</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="masonry-row-span-short soft-component-card rounded-[2rem] p-6 flex flex-col justify-between border border-white/60 shadow-md group smooth-transition">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Insight Brief</span>
-            <span class="text-xs text-slate-400 font-light">02 Min Read</span>
-          </div>
-          <h3 class="font-editorial text-lg md:text-xl text-blue-950 font-bold leading-tight mb-2">Food Hygiene for Home Care</h3>
-          <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Why proper food handling and storage is one of the most overlooked but essential caregiving responsibilities.</p>
-        </div>
-        <div class="pt-4 mt-4 border-t border-slate-200/40 flex items-center justify-between">
-          <span class="text-xs font-medium text-blue-900">Open Guide</span>
-          <span class="text-xs text-slate-300">&#9670;</span>
-        </div>
-      </div>
-
-      <div class="masonry-row-span-tall soft-component-card rounded-[2rem] p-6 flex flex-col justify-between overflow-hidden border border-white/60 shadow-md group smooth-transition">
-        <div class="w-full h-72 rounded-2xl overflow-hidden mb-6 relative">
-          <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=800&q=80" alt="Caregiving diploma students in a training classroom">
-        </div>
-        <div class="flex-grow flex flex-col justify-between">
-          <div>
-            <div class="flex justify-between items-center mb-3">
-              <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase">Student Story</span>
-              <span class="text-xs text-slate-400 font-light">June 2026</span>
-            </div>
-            <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold leading-tight mb-3">From Classroom to Care Home</h3>
-            <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed mb-4">How one CGTIA graduate's internship at a partner care home turned into a full-time caregiving role within weeks.</p>
-          </div>
-          <div class="pt-4 border-t border-slate-200/40 flex items-center justify-between">
-            <span class="text-xs font-medium text-slate-700">Read Story</span>
-            <div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-blue-950 text-xs">&rarr;</div>
-          </div>
-        </div>
-      </div>
-
-      <div class="masonry-row-span-short soft-component-card rounded-[2rem] p-6 flex flex-col justify-between border border-white/60 shadow-md group smooth-transition">
-        <div>
-          <div class="flex justify-between items-center mb-3">
-            <span class="text-[10px] font-bold tracking-widest text-slate-400 uppercase">Foundations</span>
-            <span class="text-xs text-slate-400 font-light">05 Min Read</span>
-          </div>
-          <h3 class="font-editorial text-lg md:text-xl text-blue-950 font-bold leading-tight mb-2">Building Trust with Clients</h3>
-          <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Communication habits that help new caregivers earn the confidence of clients and their families from day one.</p>
-        </div>
-        <div class="pt-4 mt-4 border-t border-slate-200/40 flex items-center justify-between">
-          <span class="text-xs font-medium text-blue-900">Open Guide</span>
-          <span class="text-xs text-slate-300">&#9670;</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Visual Campus Gallery Section -->
-  <section id="gallery" class="w-full max-w-7xl mx-auto px-6 pb-36">
-    <div class="text-left mb-12">
-      <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3"> Gallery</span>
-      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Life at CGTIA</h2>
-    </div>
-
-    <div class="peel-gallery-container">
-      <div class="peel-card group border border-white/30 shadow-lg" onclick="setPeelActive(this)">
-        <div class="peel-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80" alt="CGTIA classroom during a caregiving lecture">
-        </div>
-        <div class="peel-overlay absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent pt-24 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end h-full">
-          <span class="text-[10px] font-bold tracking-widest text-blue-400 uppercase mb-2">Classroom</span>
-          <h4 class="font-editorial text-xl md:text-2xl text-white font-bold mb-2">Lecture Sessions</h4>
-          <p class="text-slate-300 font-light text-xs md:text-sm max-w-md">Small cohort classes where instructors walk through caregiving theory before students move to practical labs.</p>
-        </div>
-      </div>
-
-      <div class="peel-card group border border-white/30 shadow-lg" onclick="setPeelActive(this)">
-        <div class="peel-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80" alt="Students practicing patient care skills in a lab setting">
-        </div>
-        <div class="peel-overlay absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent pt-24 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end h-full">
-          <span class="text-[10px] font-bold tracking-widest text-blue-400 uppercase mb-2">Clinical Lab</span>
-          <h4 class="font-editorial text-xl md:text-2xl text-white font-bold mb-2">Practical Sessions</h4>
-          <p class="text-slate-300 font-light text-xs md:text-sm max-w-md">Guided practice on real caregiving equipment, from mobility aids to vital-signs monitoring.</p>
-        </div>
-      </div>
-
-      <div class="peel-card group border border-white/30 shadow-lg" onclick="setPeelActive(this)">
-        <div class="peel-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80" alt="Interns at a partner care facility">
-        </div>
-        <div class="peel-overlay absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent pt-24 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end h-full">
-          <span class="text-[10px] font-bold tracking-widest text-blue-400 uppercase mb-2">Internships</span>
-          <h4 class="font-editorial text-xl md:text-2xl text-white font-bold mb-2">On-Site Placements</h4>
-          <p class="text-slate-300 font-light text-xs md:text-sm max-w-md">Interns shadow experienced caregivers at partner homes and clinics before working independently.</p>
-        </div>
-      </div>
-
-      <div class="peel-card group border border-white/30 shadow-lg" onclick="setPeelActive(this)">
-        <div class="peel-image-wrapper">
-          <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80" alt="Graduation ceremony for CGTIA caregiving students">
-        </div>
-        <div class="peel-overlay absolute inset-x-0 bottom-0 p-8 bg-gradient-to-t from-slate-950/80 via-slate-950/40 to-transparent pt-24 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end h-full">
-          <span class="text-[10px] font-bold tracking-widest text-blue-400 uppercase mb-2">Graduation</span>
-          <h4 class="font-editorial text-xl md:text-2xl text-white font-bold mb-2">Diploma Day</h4>
-          <p class="text-slate-300 font-light text-xs md:text-sm max-w-md">Every cohort closes with a certification ceremony celebrating each new caregiver's readiness to serve.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Programs Horizontal 3D Arc Carousel Section -->
-  <section id="programs" class="w-full max-w-7xl mx-auto px-6 pb-36">
-    <div class="text-left mb-10">
-      <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3">Institutional Offerings</span>
-      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Academic Programs</h2>
-    </div>
-
-    <div class="arc-viewport-perspective relative w-full h-[340px] md:h-[400px] flex items-center justify-center overflow-hidden py-8">
-      <div id="program-track" class="program-arc-track w-full h-full flex items-center justify-center">
-        
-        <div class="program-card-node absolute w-[280px] sm:w-[360px] h-[240px] md:h-[280px] soft-component-card rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between cursor-pointer border border-white/60 shadow-xl" data-p-index="0">
-          <div>
-            <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase block mb-2">Diploma I</span>
-            <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold leading-tight">Caregiving Fundamentals</h3>
-          </div>
-          <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Core skills every caregiver needs: hygiene, mobility support, basic first aid, and daily client care routines.</p>
-        </div>
-
-        <div class="program-card-node absolute w-[280px] sm:w-[360px] h-[240px] md:h-[280px] soft-component-card rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between cursor-pointer border border-white/60 shadow-xl" data-p-index="1">
-          <div>
-            <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase block mb-2">Diploma II</span>
-            <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold leading-tight">Elderly & Dementia Care</h3>
-          </div>
-          <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Specialized techniques for supporting aging clients, including memory care and safe mobility assistance.</p>
-        </div>
-
-        <div class="program-card-node absolute w-[280px] sm:w-[360px] h-[240px] md:h-[280px] soft-component-card rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between cursor-pointer border border-white/60 shadow-xl" data-p-index="2">
-          <div>
-            <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase block mb-2">Diploma III</span>
-            <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold leading-tight">Home Health Aide Certification</h3>
-          </div>
-          <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Preparing caregivers to work confidently and independently inside private client households.</p>
-        </div>
-
-        <div class="program-card-node absolute w-[280px] sm:w-[360px] h-[240px] md:h-[280px] soft-component-card rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between cursor-pointer border border-white/60 shadow-xl" data-p-index="3">
-          <div>
-            <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase block mb-2">Diploma IV</span>
-            <h3 class="font-editorial text-xl md:text-2xl text-blue-950 font-bold leading-tight">Food Hygiene & Nutrition</h3>
-          </div>
-          <p class="text-slate-500 font-light text-xs md:text-sm leading-relaxed">Safe food handling, storage, and nutrition planning for clients with special dietary needs.</p>
-        </div>
-
-      </div>
-    </div>
-
-    <div class="flex justify-center items-center gap-3 mt-4">
-      <button onclick="shiftArcLeft()" class="w-10 h-10 rounded-full soft-component-card flex items-center justify-center text-blue-950 hover:scale-105 transition-transform">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-      </button>
-      <div id="arc-dots" class="flex items-center gap-2"></div>
-      <button onclick="shiftArcRight()" class="w-10 h-10 rounded-full soft-component-card flex items-center justify-center text-blue-950 hover:scale-105 transition-transform">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </section>
-
-  <!-- Horizontal Editorial Testimonials Canvas -->
-  <section class="w-full max-w-7xl mx-auto px-6 pb-36 md:pb-56 overflow-hidden">
-    <div class="text-left mb-12">
-      <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3">Graduate Voices</span>
-      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">What Our Graduates Say</h2>
-    </div>
-
-    <div id="testimonialsScroll" class="w-full overflow-x-auto flex gap-8 pb-8 pt-2 px-1 no-scrollbar snap-x snap-mandatory">
-      <div class="snap-center shrink-0 w-[85vw] sm:w-[480px] soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/70 shadow-sm flex flex-col justify-between gap-8">
-        <p class="font-editorial text-xl md:text-2xl text-blue-950 font-light leading-relaxed italic">
-          "CGTIA didn't just teach me theory — the internship placement gave me the confidence to walk into my first job and already know what to do."
-        </p>
-        <div class="flex items-center gap-4 pt-4 border-t border-slate-200/40">
-          <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center font-editorial font-bold text-blue-950 text-sm">O</div>
-          <div>
-            <h4 class="text-xs font-bold tracking-wide text-blue-950">Certified Caregiver</h4>
-            <span class="text-[10px] text-slate-400 uppercase tracking-widest">2025 Graduate</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="snap-center shrink-0 w-[85vw] sm:w-[480px] soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/70 shadow-sm flex flex-col justify-between gap-8">
-        <p class="font-editorial text-xl md:text-2xl text-blue-950 font-light leading-relaxed italic">
-          "Taking the diploma through WhatsApp meant I could study between shifts at my old job. That flexibility is why I finished the program at all."
-        </p>
-        <div class="flex items-center gap-4 pt-4 border-t border-slate-200/40">
-          <div class="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center font-editorial font-bold text-slate-700 text-sm">R</div>
-          <div>
-            <h4 class="text-xs font-bold tracking-wide text-blue-950">Home Health Aide</h4>
-            <span class="text-[10px] text-slate-400 uppercase tracking-widest">2025 Graduate</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="snap-center shrink-0 w-[85vw] sm:w-[480px] soft-component-card rounded-[2.5rem] p-8 md:p-10 border border-white/70 shadow-sm flex flex-col justify-between gap-8">
-        <p class="font-editorial text-xl md:text-2xl text-blue-950 font-light leading-relaxed italic">
-          "We've hired several CGTIA graduates on staff, and the difference in preparedness compared to untrained applicants is night and day."
-        </p>
-        <div class="flex items-center gap-4 pt-4 border-t border-slate-200/40">
-          <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center font-editorial font-bold text-blue-900 text-sm">C</div>
-          <div>
-            <h4 class="text-xs font-bold tracking-wide text-blue-950">Care Coordinator</h4>
-            <span class="text-[10px] text-slate-400 uppercase tracking-widest">Partner Care Home</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="flex justify-center items-center gap-3 mt-2">
-      <button onclick="shiftTestimonial(-1)" class="w-10 h-10 rounded-full soft-component-card flex items-center justify-center text-blue-950 hover:scale-105 transition-transform">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M15 19l-7-7 7-7"/></svg>
-      </button>
-      <button onclick="shiftTestimonial(1)" class="w-10 h-10 rounded-full soft-component-card flex items-center justify-center text-blue-950 hover:scale-105 transition-transform">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-      </button>
-    </div>
-  </section>
-
-  <!-- Wall of Fame Teaser -->
-  <section class="w-full max-w-7xl mx-auto px-6 pb-28 md:pb-36">
-    <div class="w-full bg-blue-950 rounded-[2.5rem] md:rounded-[3rem] p-10 md:p-16 relative overflow-hidden">
-      <div class="absolute -right-10 -top-10 w-64 h-64 rounded-full bg-blue-800/30 blur-3xl"></div>
-      <div class="relative z-10 flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-10">
-        <div>
-          <span class="text-xs font-bold tracking-widest text-blue-300 uppercase block mb-4">Honor Roll</span>
-          <h2 class="font-editorial text-3xl md:text-4xl text-white font-bold leading-tight max-w-lg">Meet our Wall of Fame</h2>
-          <p class="text-blue-100 text-sm md:text-base font-light mt-3 max-w-md">The best graduating students from every cohort, celebrated year after year.</p>
-        </div>
-        <a href="wall-of-fame.html" class="shrink-0 inline-block px-7 py-3.5 rounded-full bg-white text-blue-950 text-xs font-semibold tracking-widest uppercase hover:bg-blue-50 smooth-transition">
-          View Wall of Fame
-        </a>
-      </div>
-      <div id="homeWallOfFamePreview" class="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-5">
-        <p class="text-blue-200 text-sm col-span-full text-center py-6">Loading honorees&hellip;</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Graduates & Activities -->
-  <section class="w-full max-w-7xl mx-auto px-6 pb-28 md:pb-36">
+  <!-- Broader graduating class + activities -->
+  <section class="w-full max-w-6xl mx-auto px-6 pb-32 md:pb-48">
     <div class="text-left mb-10 md:mb-12">
       <span class="text-xs font-bold tracking-widest text-slate-400 uppercase block mb-3">Our Graduates</span>
-      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">Where They Are Now</h2>
+      <h2 class="font-editorial text-3xl md:text-4xl text-blue-950 font-bold">The Full Graduating Class</h2>
     </div>
-    <div id="homeGraduatesPreview" class="grid grid-cols-2 sm:grid-cols-4 gap-5 md:gap-6">
+    <div id="graduatesGrid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5 md:gap-6">
       <p class="text-center text-sm text-slate-400 py-12 col-span-full">Loading graduates&hellip;</p>
-    </div>
-    <div class="text-center mt-10">
-      <a href="wall-of-fame.html" class="inline-block soft-component-card px-8 py-4 rounded-full text-xs font-semibold tracking-widest uppercase text-blue-950 border border-transparent hover:border-slate-200/50 smooth-transition">
-        See All Graduates
-      </a>
     </div>
   </section>
 
@@ -1088,6 +334,7 @@
             <li><a href="about.html" class="hover:text-blue-950 smooth-transition">About CGTIA</a></li>
             <li><a href="programs.html" class="hover:text-blue-950 smooth-transition">Programs</a></li>
             <li><a href="gallery.html" class="hover:text-blue-950 smooth-transition">Gallery</a></li>
+            <li><a href="wall-of-fame.html" class="hover:text-blue-950 smooth-transition">Wall of Fame</a></li>
           </ul>
         </div>
         <div class="space-y-4">
@@ -1104,7 +351,7 @@
           <h4 class="text-xs font-bold tracking-widest text-blue-950 uppercase">Access</h4>
           <ul class="space-y-2.5 text-sm text-slate-500 font-light">
             <li><a href="#" onclick="toggleAuthScreen('signin'); return false;" class="hover:text-blue-950 smooth-transition">Portal</a></li>
-            <li><a href="contact.html" class="hover:text-blue-950 smooth-transition">Contact</a></li>
+            <li><a href="#" class="hover:text-blue-950 smooth-transition">Inquiries</a></li>
             <li><a href="#" class="hover:text-blue-950 smooth-transition">Press Room</a></li>
           </ul>
         </div>
@@ -1124,15 +371,11 @@
     </div>
   </footer>
 
-  <!-- Fixed Bottom-Right Action Core (Replaced Swipe Shell Entirely) -->
+  <!-- Fixed Bottom-Right Action Core -->
   <div class="block md:hidden fixed bottom-6 right-6 z-50 flex items-center justify-end gap-3 pointer-events-none">
-    
-    <!-- Sliding Morphing Rectangular Capsule Node -->
     <div id="morphingIndicatorPill" onclick="retryPillNav()" class="relative morph-nav-pill h-14 bg-slate-950 text-white rounded-full flex items-center justify-center px-6 border border-white/10 shadow-xl overflow-hidden backdrop-blur-2xl">
       <span id="morphingIndicatorText" class="text-[10px] font-bold tracking-[0.25em] uppercase text-blue-100 truncate">Home</span>
     </div>
-
-    <!-- The Primary Base Ellipse Trigger Wrapper -->
     <button onclick="toggleMobileBottomSheet()" class="pointer-events-auto w-14 h-14 bg-slate-950 rounded-full flex items-center justify-center border border-white/10 text-white shadow-xl active:scale-95 transition-transform duration-200 shrink-0">
       <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 16.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm0-4.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5zm0-4.5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5-1.5-.67-1.5-1.5.67-1.5 1.5-1.5z"/>
@@ -1143,22 +386,17 @@
   <!-- Mobile Sheet Index Drawer Container -->
   <div id="mobileBottomSheet" class="block md:hidden fixed inset-0 z-50 pointer-events-none transition-all duration-500 bg-slate-950/0 backdrop-blur-0">
     <div id="bottomSheetDrawer" class="absolute bottom-0 inset-x-0 w-full max-h-[85vh] bg-white rounded-t-[2.5rem] shadow-[0_-15px_40px_rgba(15,23,42,0.15)] border-t border-slate-100 p-8 pt-4 pointer-events-auto transform translate-y-full transition-transform duration-500 cubic-bezier(0.16,1,0.3,1) flex flex-col">
-      
-      <!-- Functional Mobile Drag Handle Interceptor Area -->
       <div id="dragHandleWrapper" class="w-full py-4 cursor-grab active:cursor-grabbing shrink-0 touch-none">
         <div class="w-12 h-1 bg-slate-200 rounded-full mx-auto"></div>
       </div>
-      
       <div class="flex justify-between items-center mb-4 shrink-0">
         <span class="font-editorial text-lg font-bold text-blue-950">Explore CGTIA</span>
         <button onclick="toggleMobileBottomSheet()" class="text-xs font-bold tracking-widest text-slate-400 uppercase">Close</button>
       </div>
-
-      <!-- Scrollable Navigation Points -->
       <div class="overflow-y-auto no-scrollbar py-2 space-y-2 grow">
-        <div onclick="navigateWithPill('Home', 'index.html')" class="px-6 py-4 rounded-2xl bg-slate-50 hover:bg-blue-50 border border-slate-100 flex justify-between items-center cursor-pointer transition-colors">
-          <span class="font-editorial text-lg font-bold text-blue-950">Academy Home</span>
-          <span class="text-[10px] font-bold tracking-widest text-blue-800 uppercase">01</span>
+        <div onclick="navigateWithPill('Home', 'index.html')" class="px-6 py-4 rounded-2xl hover:bg-slate-50 flex justify-between items-center cursor-pointer transition-colors">
+          <span class="font-sans-clean text-sm font-medium text-slate-700">Home</span>
+          <span class="text-[10px] font-bold tracking-widest text-slate-300 uppercase">01</span>
         </div>
         <div onclick="navigateWithPill('About', 'about.html')" class="px-6 py-4 rounded-2xl hover:bg-slate-50 flex justify-between items-center cursor-pointer transition-colors">
           <span class="font-sans-clean text-sm font-medium text-slate-700">About Academy</span>
@@ -1169,7 +407,7 @@
           <span class="text-[10px] font-bold tracking-widest text-slate-300 uppercase">03</span>
         </div>
         <div onclick="navigateWithPill('Programs', 'programs.html')" class="px-6 py-4 rounded-2xl hover:bg-slate-50 flex justify-between items-center cursor-pointer transition-colors">
-          <span class="font-sans-clean text-sm font-medium text-slate-700">Academic Programs</span>
+          <span class="font-sans-clean text-sm font-medium text-slate-700">Programs</span>
           <span class="text-[10px] font-bold tracking-widest text-slate-300 uppercase">04</span>
         </div>
         <div onclick="navigateWithPill('Gallery', 'gallery.html')" class="px-6 py-4 rounded-2xl hover:bg-slate-50 flex justify-between items-center cursor-pointer transition-colors">
@@ -1181,25 +419,20 @@
           <span class="text-[10px] font-bold tracking-widest text-slate-300 uppercase">06</span>
         </div>
       </div>
-
-      <!-- Integrated Utility Access Point Core (Optimized Login Placement) -->
       <div class="pt-6 mt-4 border-t border-slate-100 shrink-0 space-y-3">
         <button onclick="toggleMobileBottomSheet(); setTimeout(() => toggleAuthScreen('signin'), 450);" class="w-full py-4 rounded-2xl bg-slate-950 text-white font-sans-clean text-xs font-semibold tracking-widest uppercase shadow-md active:scale-[0.99] transition-transform">
           School Portal
         </button>
       </div>
-
     </div>
   </div>
 
   <!-- Apply Screen Overlay -->
   <div id="applyScreen" class="fixed inset-0 z-[60] pointer-events-none transition-all duration-500 bg-slate-950/0 backdrop-blur-0 flex items-end md:items-center md:justify-center">
     <div id="applyDrawer" class="w-full md:w-[560px] md:max-h-[88vh] max-h-[92vh] bg-white rounded-t-[2.5rem] md:rounded-[2.5rem] shadow-[0_-15px_40px_rgba(15,23,42,0.15)] md:shadow-2xl border-t md:border border-slate-100 p-8 md:p-10 pointer-events-auto transform translate-y-full md:translate-y-8 md:opacity-0 transition-transform md:transition-all duration-500 flex flex-col overflow-y-auto no-scrollbar">
-      
       <div class="w-full py-2 mb-2 md:hidden">
         <div class="w-12 h-1 bg-slate-200 rounded-full mx-auto"></div>
       </div>
-
       <div class="flex justify-between items-start mb-6 shrink-0">
         <div>
           <span class="text-xs font-bold tracking-widest text-blue-800 uppercase block mb-2">Admissions</span>
@@ -1207,7 +440,6 @@
         </div>
         <button onclick="toggleApplyScreen()" class="text-xs font-bold tracking-widest text-slate-400 uppercase mt-2">Close</button>
       </div>
-
       <form id="applyForm" class="space-y-5" onsubmit="handleApplySubmit(event)">
         <div class="hidden" aria-hidden="true">
           <label for="applyWebsiteField">Leave this field empty</label>
@@ -1215,16 +447,16 @@
         </div>
         <div>
           <label class="text-xs font-semibold tracking-wide text-slate-500 uppercase block mb-2">Full Name</label>
-          <input required type="text" id="fullNameInput" placeholder="e.g. Ada Okonkwo" class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:border-blue-900/40 focus:bg-white outline-none text-sm text-slate-800 smooth-transition">
+          <input required type="text" placeholder="e.g. Ada Okonkwo" class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:border-blue-900/40 focus:bg-white outline-none text-sm text-slate-800 smooth-transition">
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
           <div>
             <label class="text-xs font-semibold tracking-wide text-slate-500 uppercase block mb-2">Phone Number</label>
-            <input required type="tel" id="phoneInput" placeholder="080X XXX XXXX" class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:border-blue-900/40 focus:bg-white outline-none text-sm text-slate-800 smooth-transition">
+            <input required type="tel" placeholder="080X XXX XXXX" class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:border-blue-900/40 focus:bg-white outline-none text-sm text-slate-800 smooth-transition">
           </div>
           <div>
             <label class="text-xs font-semibold tracking-wide text-slate-500 uppercase block mb-2">Email Address</label>
-            <input required type="email" id="emailInput" placeholder="you@email.com" class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:border-blue-900/40 focus:bg-white outline-none text-sm text-slate-800 smooth-transition">
+            <input required type="email" placeholder="you@email.com" class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:border-blue-900/40 focus:bg-white outline-none text-sm text-slate-800 smooth-transition">
           </div>
         </div>
         <div>
@@ -1243,10 +475,9 @@
           <p class="text-[11px] text-slate-400 mt-2">Each cohort has one fixed start date &mdash; there's no need to pick your own.</p>
         </div>
         <div>
-          <label class="text-xs font-semibold tracking-wide text-slate-500 uppercase block mb-2"> (Optional) Tell us a little about you</label>
+          <label class="text-xs font-semibold tracking-wide text-slate-500 uppercase block mb-2">Tell us a little about you</label>
           <textarea rows="3" placeholder="Why are you interested in caregiving training?" class="w-full px-5 py-3.5 rounded-2xl bg-slate-50 border border-slate-200 focus:border-blue-900/40 focus:bg-white outline-none text-sm text-slate-800 smooth-transition resize-none"></textarea>
         </div>
-
         <button type="submit" class="w-full mt-4 py-4 rounded-full bg-blue-950 text-white text-xs font-semibold tracking-widest uppercase shadow-lg shadow-blue-950/20 hover:bg-blue-900 smooth-transition">
           Submit Application
         </button>
@@ -1459,18 +690,21 @@
     </div>
   </div>
 
-  <!-- Runtime Architecture Scripts -->
   <script>
-    window.addEventListener('DOMContentLoaded', () => {
-      initProgramArcEngine();
-      initFunctionalDragHandleEngine();
-    });
-
     /* --- MORPHING NAV PILL: A SEAMLESS, CROSS-PAGE LOADER ---
-       Spins for a genuine 3s on the current page first, then navigates.
-       The loading state carries over to the destination page via
-       sessionStorage so it keeps spinning there too, holding for another 3s
-       once that page has actually fully loaded before collapsing. */
+       - Spins for a genuine 3s on the CURRENT page first.
+       - Only then does it fire the actual navigation.
+       - The "still loading" state is carried over sessionStorage, so the
+         moment the destination page's script runs, the pill picks back up
+         already expanded and spinning — no reset, no gap.
+       - On arrival it spins for another 3s (or until the page has actually
+         fully finished loading, whichever is longer) before collapsing back
+         into the ellipse — a clear affirmation it's ready.
+       - If the device is offline, it shows a red "Check Your Network" state.
+         It doesn't just sit there — it checks every 2s and also listens for
+         the browser's 'online' event, so the moment connectivity returns it
+         automatically resumes and finishes navigating on its own. Tapping
+         the pill also retries immediately. */
     let __pillRetry = null;
     let __networkPollTimer = null;
     let __onlineHandler = null;
@@ -1504,6 +738,11 @@
     function closeMobileBottomSheetIfOpen() {
       const container = document.getElementById('mobileBottomSheet');
       if (!container) return;
+      // pointer-events-none is present only while the sheet is closed —
+      // if it's NOT there, the sheet is open, so toggling now closes it.
+      // If it's already closed (e.g. this navigation came from a footer
+      // link or in-page link, not the sheet itself), do nothing — a blind
+      // toggle() here would incorrectly open it instead.
       if (!container.classList.contains('pointer-events-none')) {
         toggleMobileBottomSheet();
       }
@@ -1549,6 +788,8 @@
           sessionStorage.setItem('pillNavActive', '1');
         } catch (e) {}
 
+        // Only navigate once the pill has genuinely spun for the full
+        // pre-nav duration on this page.
         setTimeout(() => { window.location.href = href; }, preNavSpin);
       }, sheetCloseDelay);
     }
@@ -1572,6 +813,9 @@
       pillWrap.classList.add('state-expanded');
 
       function settle() {
+        // Holds for a further 3s once the page is confirmed fully loaded —
+        // so total spin time naturally covers however long the page
+        // actually took, plus this fixed affirmation window.
         setTimeout(() => {
           pillWrap.classList.remove('state-expanded');
           try {
@@ -1588,9 +832,19 @@
       }
     }
 
+    // Run this as early as the script executes (the pill markup is already
+    // in the DOM above this point), so there's no visible gap on arrival.
     restoreArrivalPill();
 
-    /* --- GLOBAL PILL LOADER ON EVERY INTERNAL LINK, SITE-WIDE --- */
+    /* --- GLOBAL PILL LOADER ON EVERY INTERNAL LINK, SITE-WIDE ---
+       Rather than hand-wiring navigateWithPill() onto every single link
+       (header nav, footer links, in-body links like "View Tuition & Fees",
+       and pages that aren't in the bottom nav sheet at all — Privacy,
+       Terms, Licensing, Custom), this catches any click on an internal
+       .html link anywhere on the page and routes it through the same pill
+       loader automatically. External links, mailto:/tel:/wa.me links,
+       same-page "#" anchors, and anything explicitly opted out with
+       data-no-pill are left alone. */
     document.addEventListener('click', function (e) {
       const link = e.target.closest('a[href]');
       if (!link) return;
@@ -1613,10 +867,13 @@
     }
 
     /* --- FORCE-RESET ALL OVERLAYS ON EVERY PAGE SHOW ---
-       Fixes a stuck-open overlay (apply drawer, status/payment sheet, mobile
-       sheet) reappearing with no way to close it when the page is restored
-       from the browser's back/forward cache, since DOMContentLoaded doesn't
-       fire again in that case but 'pageshow' does. */
+       'pageshow' fires on a normal load AND when the browser restores a page
+       from bfcache (back/forward navigation). DOMContentLoaded does NOT fire
+       on a bfcache restore, so without this, an overlay left open when the
+       person navigated away (apply drawer, status sheet, payment sheet,
+       lightbox, mobile sheet) can appear stuck open with no obvious way to
+       close it the next time this page is shown. This guarantees a clean
+       slate every time. */
     function resetAllOverlays() {
       const overlays = [
         { id: 'applyScreen', drawerId: 'applyDrawer' },
@@ -1625,7 +882,8 @@
         { id: 'authScreen', drawerId: 'authDrawer' },
         { id: 'forgotPasswordScreen', drawerId: 'forgotPasswordDrawer' },
         { id: 'forcePasswordScreen', drawerId: 'forcePasswordDrawer' },
-        { id: 'mobileBottomSheet', drawerId: 'bottomSheetDrawer' }
+        { id: 'mobileBottomSheet', drawerId: 'bottomSheetDrawer' },
+        { id: 'faqQuestionScreen', drawerId: 'faqQuestionDrawer' }
       ];
       overlays.forEach(({ id, drawerId }) => {
         const container = document.getElementById(id);
@@ -1638,6 +896,13 @@
           drawer.style.opacity = '';
         }
       });
+
+      const lightbox = document.getElementById('lightboxOverlay');
+      if (lightbox) {
+        lightbox.classList.remove('lightbox-visible');
+        lightbox.classList.add('lightbox-hidden');
+      }
+
       document.body.style.overflow = '';
     }
 
@@ -1647,20 +912,15 @@
     function toggleMobileBottomSheet() {
       const container = document.getElementById('mobileBottomSheet');
       const drawer = document.getElementById('bottomSheetDrawer');
-      
       if (container.classList.contains('pointer-events-none')) {
         container.classList.remove('pointer-events-none', 'bg-slate-950/0', 'backdrop-blur-0');
         container.classList.add('pointer-events-auto', 'bg-slate-950/40', 'backdrop-blur-md');
         drawer.style.transform = 'translateY(0)';
-        
-        // Strict background scrolling freeze execution
         document.body.style.overflow = 'hidden';
       } else {
         container.classList.remove('pointer-events-auto', 'bg-slate-950/40', 'backdrop-blur-md');
         container.classList.add('pointer-events-none', 'bg-slate-950/0', 'backdrop-blur-0');
         drawer.style.transform = 'translateY(100%)';
-        
-        // Restore standard layout scrolling states
         document.body.style.overflow = '';
       }
     }
@@ -1669,6 +929,7 @@
     function initFunctionalDragHandleEngine() {
       const handle = document.getElementById('dragHandleWrapper');
       const drawer = document.getElementById('bottomSheetDrawer');
+      if (!handle || !drawer) return;
       let isDragging = false;
       let startY = 0;
       let currentTranslationY = 0;
@@ -1694,7 +955,6 @@
         isDragging = false;
         drawer.style.transition = 'transform 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
         handle.releasePointerCapture(e.pointerId);
-
         if (currentTranslationY > 110) {
           toggleMobileBottomSheet();
           setTimeout(() => { drawer.style.transform = ''; }, 500);
@@ -1705,90 +965,11 @@
       });
     }
 
-    /* --- 3D ARC CAROUSEL MECHANICAL ENGINE --- */
-    let activeArcIndex = 1; 
-    const totalArcCards = 4;
-
-    function initProgramArcEngine() {
-      buildArcIndicators();
-      updateArcLayout();
-      setupArcInteraction();
-    }
-
-    function buildArcIndicators() {
-      const dotsContainer = document.getElementById('arc-dots');
-      dotsContainer.innerHTML = '';
-      for (let i = 0; i < totalArcCards; i++) {
-        const dot = document.createElement('div');
-        dot.className = `h-1.5 rounded-full transition-all duration-500 ${i === activeArcIndex ? 'w-6 bg-blue-950' : 'w-1.5 bg-slate-300'}`;
-        dot.setAttribute('data-dot-index', i);
-        dotsContainer.appendChild(dot);
-      }
-    }
-
-    function updateArcLayout() {
-      const cards = document.querySelectorAll('.program-card-node');
-      cards.forEach((card) => {
-        const idx = parseInt(card.getAttribute('data-p-index'));
-        card.className = 'program-card-node absolute w-[280px] sm:w-[360px] h-[240px] md:h-[280px] soft-component-card rounded-[2.5rem] p-8 md:p-10 flex flex-col justify-between cursor-pointer border border-white/60 shadow-xl';
-        
-        if (idx === activeArcIndex) card.classList.add('state-center');
-        else if (idx === activeArcIndex - 1) card.classList.add('state-left-prev');
-        else if (idx === activeArcIndex + 1) card.classList.add('state-right-next');
-        else if (idx < activeArcIndex) card.classList.add('state-stowed-left');
-        else if (idx > activeArcIndex) card.classList.add('state-stowed-right');
-      });
-
-      const dots = document.querySelectorAll('[data-dot-index]');
-      dots.forEach((dot) => {
-        dot.className = parseInt(dot.getAttribute('data-dot-index')) === activeArcIndex 
-          ? 'h-1.5 w-6 bg-blue-950 rounded-full transition-all duration-500' 
-          : 'h-1.5 w-1.5 bg-slate-300 rounded-full transition-all duration-500';
-      });
-    }
-
-    function setupArcInteraction() {
-      document.querySelectorAll('.program-card-node').forEach((card) => {
-        card.addEventListener('click', () => {
-          const targetIndex = parseInt(card.getAttribute('data-p-index'));
-          if (targetIndex !== activeArcIndex) {
-            activeArcIndex = targetIndex;
-            updateArcLayout();
-          }
-        });
-      });
-    }
-
-    function shiftArcLeft() { if (activeArcIndex > 0) { activeArcIndex--; updateArcLayout(); } }
-
-    /* --- PEEL GALLERY: click/tap-driven (authoritative on all devices,
-       since iOS Safari doesn't reliably trigger :hover on tap) --- */
-    function setPeelActive(card) {
-      const container = card.closest('.peel-gallery-container');
-      if (!container) return;
-      const wasActive = card.classList.contains('peel-active');
-      container.querySelectorAll('.peel-card').forEach((c) => c.classList.remove('peel-active'));
-      if (!wasActive) {
-        card.classList.add('peel-active');
-      }
-    }
-
-    /* --- TESTIMONIALS: prev/next tap controls for the swipe carousel --- */
-    function shiftTestimonial(direction) {
-      const container = document.getElementById('testimonialsScroll');
-      if (!container) return;
-      const card = container.querySelector('.snap-center');
-      const cardWidth = card ? card.getBoundingClientRect().width + 32 : 400;
-      container.scrollBy({ left: direction * cardWidth, behavior: 'smooth' });
-    }
-    function shiftArcRight() { if (activeArcIndex < totalArcCards - 1) { activeArcIndex++; updateArcLayout(); } }
-
     /* --- APPLY SCREEN OVERLAY MECHANICS --- */
     function toggleApplyScreen() {
       const container = document.getElementById('applyScreen');
       const drawer = document.getElementById('applyDrawer');
       const isClosed = container.classList.contains('pointer-events-none');
-
       if (isClosed) {
         container.classList.remove('pointer-events-none', 'bg-slate-950/0', 'backdrop-blur-0');
         container.classList.add('pointer-events-auto', 'bg-slate-950/40', 'backdrop-blur-md');
@@ -1824,11 +1005,14 @@
       drawer.style.opacity = '';
       document.body.style.overflow = '';
 
-      const form = document.getElementById('applyForm');
-      if (form) {
-        form.reset();
-        Array.from(form.querySelectorAll('input, select, textarea, button')).forEach(el => el.disabled = false);
-      }
+      const forms = ['applyForm', 'contactForm'];
+      forms.forEach((fid) => {
+        const form = document.getElementById(fid);
+        if (form) {
+          form.reset();
+          Array.from(form.querySelectorAll('input, select, textarea, button')).forEach(el => el.disabled = false);
+        }
+      });
     }
 
     function setStatusLoading() {
@@ -1840,7 +1024,8 @@
         '</svg>';
       document.getElementById('statusTitle').innerText = 'Sending your application\u2026';
       document.getElementById('statusMessage').innerText = 'Please hold on while we submit your details to admissions.';
-      document.getElementById('statusActionBtn').classList.add('hidden');
+      const btn = document.getElementById('statusActionBtn');
+      btn.classList.add('hidden');
     }
 
     function setStatusSuccess(title, message) {
@@ -1906,8 +1091,8 @@
       }
     }
 
-    /* Real handleApplySubmit (writing to Firestore) lives in the Firebase
-       integration script included below. */
+    /* Real handleApplySubmit (writing to Firestore) lives in the shared
+       Firebase integration script included on every page. */
 
     /* --- PAYMENT SHEET MECHANICS (Paystack: transfer preferred, card available) --- */
     let __currentPaymentProgram = null;
@@ -1919,8 +1104,9 @@
       return '\u20a6' + Math.round(n).toLocaleString('en-NG');
     }
 
-    // Bridge for the Firebase integration script (type="module", isolated
-    // scope) to read the payment state chosen here.
+    // Bridge for the Firebase integration script (type="module", which has
+    // its own isolated scope and can't see `let` bindings from this plain
+    // script directly) to read the payment state the person has chosen.
     function getPaymentState() {
       return {
         plan: __paymentPlan,
@@ -2007,6 +1193,9 @@
         cardBtn.className = 'flex-1 py-2.5 rounded-full text-[11px] font-bold tracking-wide uppercase text-slate-500 smooth-transition';
         transferPane.classList.remove('hidden');
         cardPane.classList.add('hidden');
+        // Hook into the Firebase integration script (type="module", set
+        // once it loads) to fetch this applicant's dedicated virtual
+        // account — falls back to the static shared account if unset.
         if (typeof window.ensureVirtualAccount === 'function') {
           window.ensureVirtualAccount();
         }
@@ -2025,17 +1214,16 @@
       }
     }
 
-    /* Real handleTransferConfirm and payWithPaystackCard (writing to
-       Firestore, real Paystack reference wiring) live in the Firebase
-       integration script included below. */
+    /* Real handleTransferConfirm, payWithPaystackCard, and
+       handleContactSubmit (writing to Firestore, real Paystack reference
+       wiring) live in the shared Firebase integration script included on
+       every page. */
 
-
-        /* --- SIGN IN OVERLAY MECHANICS --- */
+    /* --- SIGN IN OVERLAY MECHANICS --- */
     function toggleAuthScreen() {
       const container = document.getElementById('authScreen');
       const drawer = document.getElementById('authDrawer');
       const isClosed = container.classList.contains('pointer-events-none');
-
       if (isClosed) {
         container.classList.remove('pointer-events-none', 'bg-slate-950/0', 'backdrop-blur-0');
         container.classList.add('pointer-events-auto', 'bg-slate-950/40', 'backdrop-blur-md');
@@ -2053,9 +1241,10 @@
       }
     }
 
-    /* Real handleAuthSubmit (Firebase Auth sign-in) lives in the Firebase
-       integration script included below. */
-
+    window.addEventListener('DOMContentLoaded', () => {
+      initFunctionalDragHandleEngine();
+      if (typeof initPageSpecific === 'function') initPageSpecific();
+    });
   </script>
 
   <script type="module">
@@ -2276,98 +1465,62 @@
       }
     }
 
-  window.handleApplySubmit = async function(event) {
-  event.preventDefault();
-  
-  const form = document.getElementById('applyForm');
-  const honeypot = document.getElementById('applyWebsiteField');
-  
-  if (honeypot && honeypot.value) {
-    toggleApplyScreen();
-    return;
-  }
-  
-  const programKey = document.getElementById('programSelect').value;
-  if (!programKey) return;
-  
-  const fullName = document.getElementById('fullNameInput').value.trim();
-  const phone = document.getElementById('phoneInput').value.trim();
-  const email = document.getElementById('emailInput').value.trim();
-  const normalizedEmailId = email.toLowerCase();
-  
-  const startDateEl = document.getElementById('startDateDisplay');
-  const startDate = startDateEl ? startDateEl.innerText.trim() : '';
-  
-  const messageEl = form.querySelector('textarea');
-  const message = messageEl ? messageEl.value.trim() : '';
-  
-  Array.from(form.querySelectorAll('input, select, textarea, button'))
-    .forEach((el) => (el.disabled = true));
-  
-  toggleApplyScreen();
-  
-  setTimeout(async () => {
-    openStatusScreen();
-    setStatusLoading();
-    
-    try {
-      const applicationRef = doc(db, 'applications', normalizedEmailId);
-      
-      await setDoc(applicationRef, {
-        fullName,
-        phone,
-        email: normalizedEmailId,
-        program: programKey,
-        startDate,
-        message,
-        status: 'pending',
-        paymentStatus: 'unpaid',
-        paymentPlan: 'full',
-        installmentsTotal: 1,
-        installmentsPaid: 0,
-        createdAt: serverTimestamp(),
-        updatedAt: serverTimestamp()
-      });
-      
-      __currentApplicationId = normalizedEmailId;
-      
-      setTimeout(() => {
-        setStatusSuccess(
-          'Application Received',
-          'Thanks — complete payment below to secure your seat for this cohort.'
-        );
-        
-        const btn = document.getElementById('statusActionBtn');
-        btn.innerText = 'Continue to Payment';
-        btn.onclick = function() {
-          closeStatusScreen();
+    window.handleApplySubmit = async function (event) {
+      event.preventDefault();
+      const form = document.getElementById('applyForm');
+      const honeypot = document.getElementById('applyWebsiteField');
+      if (honeypot && honeypot.value) { toggleApplyScreen(); return; }
+
+      const programKey = document.getElementById('programSelect').value;
+      if (!programKey) return;
+      const fullName = form.querySelector('input[type="text"]').value.trim();
+      const phone = form.querySelector('input[type="tel"]').value.trim();
+      const email = form.querySelector('input[type="email"]').value.trim();
+      const startDateEl = document.getElementById('startDateDisplay');
+      const startDate = startDateEl ? startDateEl.innerText.trim() : '';
+      const messageEl = form.querySelector('textarea');
+      const message = messageEl ? messageEl.value.trim() : '';
+
+      Array.from(form.querySelectorAll('input, select, textarea, button')).forEach((el) => (el.disabled = true));
+      toggleApplyScreen();
+
+      setTimeout(async () => {
+        openStatusScreen();
+        setStatusLoading();
+        try {
+          const docRef = await addDoc(collection(db, 'applications'), {
+            fullName, phone, email, program: programKey, startDate, message,
+            status: 'pending',
+            paymentStatus: 'unpaid',
+            paymentPlan: 'full',
+            installmentsTotal: 1,
+            installmentsPaid: 0,
+            createdAt: serverTimestamp(),
+            updatedAt: serverTimestamp()
+          });
+          __currentApplicationId = docRef.id;
+          __virtualAccountFetched = false;
+          notifyStaff('application', { name: fullName, email, phone, program: programKey });
+
           setTimeout(() => {
-            openPaymentScreen(programKey, normalizedEmailId);
-          }, 450);
-        };
-        
-        Array.from(form.querySelectorAll('input, select, textarea, button'))
-          .forEach((el) => (el.disabled = false));
-      }, 1000);
-      
-    } catch (err) {
-      console.error('Application submission failed:', err);
-      console.error('Error code:', err.code);
-      console.error('Error message:', err.message);
-      console.error('Full error:', err);
-      
-      setStatusError(
-        'Submission Failed',
-        'We could not submit your application at this time. Please try again.',
-        function() {
-          closeStatusScreen();
-          Array.from(form.querySelectorAll('input, select, textarea, button'))
-            .forEach((el) => (el.disabled = false));
+            setStatusSuccess('Application Received', 'Thanks \u2014 complete payment below to secure your seat for this cohort.');
+            const btn = document.getElementById('statusActionBtn');
+            btn.innerText = 'Continue to Payment';
+            btn.onclick = function () {
+              closeStatusScreen();
+              setTimeout(() => { openPaymentScreen(programKey, email); }, 450);
+            };
+            Array.from(form.querySelectorAll('input, select, textarea, button')).forEach((el) => (el.disabled = false));
+          }, 1000);
+        } catch (err) {
+          console.error(err);
+          setStatusError('Submission Failed', 'Something went wrong and your application didn\u2019t go through. Please try again.', function () {
+            closeStatusScreen();
+            Array.from(form.querySelectorAll('input, select, textarea, button')).forEach((el) => (el.disabled = false));
+          });
         }
-      );
-    }
-  }, 500);
-};
+      }, 500);
+    };
 
     /* =====================================================================
        DEDICATED VIRTUAL ACCOUNT (per-applicant, via Netlify function)
@@ -2430,40 +1583,39 @@
        confirm-transfer Netlify function), since a client marking its own
        payment as complete would be trivial to fake.
        ===================================================================== */
-  window.handleTransferConfirm = async function() {
-  if (!__currentApplicationId) { closePaymentScreen(); return; }
-  const state = getPaymentState();
-  const plan = state.plan;
-  const total = plan === 'installment' ? 3 : 1;
-  
-  try {
-    await updateDoc(doc(db, 'applications', __currentApplicationId), {
-      paymentPlan: plan,
-      installmentsTotal: total,
-      updatedAt: serverTimestamp(),
-      email: __currentApplicationId
-    });
-  } catch (err) {
-    console.error('Could not record payment plan', err);
-  }
-  
-  closePaymentScreen();
-  setTimeout(() => {
-    openStatusScreen();
-    setStatusLoading();
-    document.getElementById('statusTitle').innerText = 'Recording your transfer\u2026';
-    document.getElementById('statusMessage').innerText = 'Please hold on a moment.';
-    setTimeout(() => {
-      const isInstallment = plan === 'installment';
-      setStatusSuccess(
-        isInstallment ? 'First Installment Noted' : 'Transfer Noted',
-        'We\u2019ve recorded your transfer and will verify it against our bank statement, then ' +
-        (isInstallment ? 'email your login code' : 'confirm your seat by email') +
-        ' \u2014 this can take a little while during manual review.'
-      );
-    }, 1600);
-  }, 450);
-};
+    window.handleTransferConfirm = async function () {
+      if (!__currentApplicationId) { closePaymentScreen(); return; }
+      const state = getPaymentState();
+      const plan = state.plan;
+      const total = plan === 'installment' ? 3 : 1;
+
+      try {
+        await updateDoc(doc(db, 'applications', __currentApplicationId), {
+          paymentPlan: plan,
+          installmentsTotal: total,
+          updatedAt: serverTimestamp()
+        });
+      } catch (err) {
+        console.error('Could not record payment plan', err);
+      }
+
+      closePaymentScreen();
+      setTimeout(() => {
+        openStatusScreen();
+        setStatusLoading();
+        document.getElementById('statusTitle').innerText = 'Recording your transfer\u2026';
+        document.getElementById('statusMessage').innerText = 'Please hold on a moment.';
+        setTimeout(() => {
+          const isInstallment = plan === 'installment';
+          setStatusSuccess(
+            isInstallment ? 'First Installment Noted' : 'Transfer Noted',
+            'We\u2019ve recorded your transfer and will verify it against our bank statement, then ' +
+            (isInstallment ? 'email your login code' : 'confirm your seat by email') +
+            ' \u2014 this can take a little while during manual review.'
+          );
+        }, 1600);
+      }, 450);
+    };
 
     window.payWithPaystackCard = async function () {
       if (typeof PaystackPop === 'undefined') {
@@ -3089,9 +2241,12 @@
     if (document.getElementById('galleryGraduationContainer')) initGalleryGraduationSection();
   </script>
 
+
   <style>
+
     @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     @keyframes blurFadeIn { from { opacity: 0; filter: blur(12px); transform: translateY(20px); } to { opacity: 1; filter: blur(0px); transform: translateY(0); } }
+
   </style>
 </body>
 </html>
