@@ -54,30 +54,52 @@ exports.handler = async (event) => {
   console.log('📧 Customer email:', data.customer ? data.customer.email : 'No customer');
   console.log('📧 Customer code:', data.customer ? data.customer.customer_code : 'No customer');
   console.log('📧 Channel:', data.channel || 'Unknown');
+  console.log('📧 Metadata:', data.metadata ? JSON.stringify(data.metadata) : 'No metadata');
   
   let appRef = null;
   let appData = null;
   
-  // 1. Card payment path — reference is the application doc id directly.
-  if (data.reference) {
-    console.log('🔍 Looking up application by reference:', data.reference);
+  // ============================================================
+  // 1. PRIMARY MATCH: Use metadata.applicationId (frontend sends this)
+  // ============================================================
+  const appIdFromMetadata = data.metadata && data.metadata.applicationId;
+  if (appIdFromMetadata) {
+    console.log('🔍 [PRIMARY] Looking up by metadata.applicationId:', appIdFromMetadata);
+    console.log('📄 Full path: applications/' + appIdFromMetadata);
+    const candidate = db.collection('applications').doc(appIdFromMetadata);
+    const snap = await candidate.get();
+    if (snap.exists) {
+      appRef = candidate;
+      appData = snap.data();
+      console.log('✅ [PRIMARY] Found application by metadata.applicationId!');
+      console.log('📄 Application email:', appData.email);
+    } else {
+      console.log('❌ [PRIMARY] NO application found with metadata.applicationId:', appIdFromMetadata);
+    }
+  }
+  
+  // ============================================================
+  // 2. FALLBACK 1: Try by reference (Paystack might have preserved it)
+  // ============================================================
+  if (!appRef && data.reference) {
+    console.log('🔍 [FALLBACK 1] Looking up by reference:', data.reference);
     console.log('📄 Full path: applications/' + data.reference);
     const candidate = db.collection('applications').doc(data.reference);
     const snap = await candidate.get();
     if (snap.exists) {
       appRef = candidate;
       appData = snap.data();
-      console.log('✅ Found application by reference!');
-      console.log('📄 Application data:', JSON.stringify(appData, null, 2));
+      console.log('✅ [FALLBACK 1] Found application by reference!');
     } else {
-      console.log('❌ NO application found with reference:', data.reference);
-      console.log('❌ This is why payment status is not updating!');
+      console.log('❌ [FALLBACK 1] No application found by reference:', data.reference);
     }
   }
   
-  // 2. Try matching by customer_code (DVA path)
+  // ============================================================
+  // 3. FALLBACK 2: Try by customer_code (DVA path)
+  // ============================================================
   if (!appRef && data.customer && data.customer.customer_code) {
-    console.log('🔍 Looking up by customer_code:', data.customer.customer_code);
+    console.log('🔍 [FALLBACK 2] Looking up by customer_code:', data.customer.customer_code);
     const q = await db.collection('applications')
       .where('paystackCustomerCode', '==', data.customer.customer_code)
       .limit(1)
@@ -85,15 +107,17 @@ exports.handler = async (event) => {
     if (!q.empty) {
       appRef = q.docs[0].ref;
       appData = q.docs[0].data();
-      console.log('✅ Found application by customer_code!');
+      console.log('✅ [FALLBACK 2] Found application by customer_code!');
     } else {
-      console.log('❌ No application found by customer_code');
+      console.log('❌ [FALLBACK 2] No application found by customer_code');
     }
   }
   
-  // 3. Try matching by account number
+  // ============================================================
+  // 4. FALLBACK 3: Try by account number
+  // ============================================================
   if (!appRef && data.authorization && data.authorization.receiver_bank_account_number) {
-    console.log('🔍 Looking up by account number:', data.authorization.receiver_bank_account_number);
+    console.log('🔍 [FALLBACK 3] Looking up by account number:', data.authorization.receiver_bank_account_number);
     const q = await db.collection('applications')
       .where('virtualAccountNumber', '==', data.authorization.receiver_bank_account_number)
       .limit(1)
@@ -101,15 +125,19 @@ exports.handler = async (event) => {
     if (!q.empty) {
       appRef = q.docs[0].ref;
       appData = q.docs[0].data();
-      console.log('✅ Found application by account number!');
+      console.log('✅ [FALLBACK 3] Found application by account number!');
     } else {
-      console.log('❌ No application found by account number');
+      console.log('❌ [FALLBACK 3] No application found by account number');
     }
   }
   
+  // ============================================================
+  // 5. Check if we found anything
+  // ============================================================
   if (!appRef) {
     console.error('❌❌❌ COULD NOT MATCH PAYMENT TO ANY APPLICATION!');
-    console.error('🔍 Reference searched:', data.reference);
+    console.error('🔍 Metadata.applicationId searched:', data.metadata ? data.metadata.applicationId : 'None');
+    console.error('🔍 Reference searched:', data.reference || 'None');
     console.error('🔍 Customer code searched:', data.customer ? data.customer.customer_code : 'None');
     console.error('🔍 Account number searched:', data.authorization ? data.authorization.receiver_bank_account_number : 'None');
     return { statusCode: 200, body: 'No matching application — acknowledged' };
@@ -117,6 +145,7 @@ exports.handler = async (event) => {
   
   console.log('✅ MATCH FOUND! Updating payment...');
   console.log('📄 Application ID:', appRef.id);
+  console.log('📄 Application email:', appData.email);
   
   try {
     const method = data.channel === 'dedicated_nuban' ? 'transfer' : 'card';
