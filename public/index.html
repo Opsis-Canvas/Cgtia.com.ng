@@ -2466,68 +2466,66 @@
 };
 
     window.payWithPaystackCard = async function () {
-      if (typeof PaystackPop === 'undefined') {
-        alert('Paystack checkout isn\u2019t connected yet \u2014 add your Paystack public key to enable card payments.');
-        return;
-      }
-      if (!__currentApplicationId) return;
+  if (typeof PaystackPop === 'undefined') {
+    alert('Paystack checkout isn\'t connected yet \u2014 add your Paystack public key to enable card payments.');
+    return;
+  }
+  if (!__currentApplicationId) return;
 
-      const state = getPaymentState();
-      const plan = state.plan;
-      const total = plan === 'installment' ? 3 : 1;
-      const amountDue = plan === 'installment'
-        ? state.installmentAmounts[0]
-        : (state.program ? state.program.amount : 0);
+  const state = getPaymentState();
+  const plan = state.plan;
+  const total = plan === 'installment' ? 3 : 1;
+  const amountDue = plan === 'installment'
+    ? state.installmentAmounts[0]
+    : (state.program ? state.program.amount : 0);
 
-      try {
-        await updateDoc(doc(db, 'applications', __currentApplicationId), {
-          paymentPlan: plan,
-          installmentsTotal: total,
-          updatedAt: serverTimestamp()
-        });
-      } catch (err) {
-        console.error('Could not record payment plan', err);
-      }
+  try {
+    await updateDoc(doc(db, 'applications', __currentApplicationId), {
+      paymentPlan: plan,
+      installmentsTotal: total,
+      updatedAt: serverTimestamp()
+    });
+  } catch (err) {
+    console.error('Could not record payment plan', err);
+  }
 
-      const applicationId = __currentApplicationId;
-      const handler = PaystackPop.setup({
-        // TODO: replace with your real Paystack public key (pk_live_... or
-        // pk_test_... to start).
-        // Test mode key — swap for your pk_live_... key only once you've
-        // fully tested the payment flow and are ready to accept real money.
-        key: 'pk_test_d5e8813de6f1b2a281dd55d6aa71211acaa2e2b4',
-        email: state.email || 'applicant@example.com',
-        amount: Math.round(amountDue * 100),
-        currency: 'NGN',
-        // The reference is the actual Firestore application doc id — the
-        // paystackWebhook Cloud Function looks this up directly to confirm
-        // the right document, rather than trusting anything else in the
-        // payload.
-        reference: applicationId,
-        metadata: {
-          applicationId: applicationId,
-          paymentPlan: plan
-        },
-        callback: function (response) {
-          closePaymentScreen();
-          setTimeout(() => {
-            openStatusScreen();
-            setStatusLoading();
-            document.getElementById('statusTitle').innerText = 'Confirming your payment\u2026';
-            setTimeout(() => {
-              const isInstallment = plan === 'installment';
-              setStatusSuccess(
-                isInstallment ? 'First Installment Received' : 'Payment Received',
-                (isInstallment ? 'Your login code is on its way to your email. ' : 'Your seat is confirmed. ') +
-                'Reference: ' + response.reference
-              );
-            }, 1400);
-          }, 450);
-        },
-        onClose: function () {}
-      });
-      handler.openIframe();
-    };
+  const applicationId = __currentApplicationId;
+  console.log('🔑 Sending reference to Paystack:', applicationId);
+  console.log('🔑 Email:', state.email);
+  console.log('🔑 Plan:', plan);
+  console.log('🔑 Amount:', amountDue);
+
+  const handler = PaystackPop.setup({
+    key: 'pk_test_d5e8813de6f1b2a281dd55d6aa71211acaa2e2b4', // Change to pk_live_... when ready
+    email: state.email || 'applicant@example.com',
+    amount: Math.round(amountDue * 100),
+    currency: 'NGN',
+    reference: applicationId,
+    metadata: {
+      applicationId: applicationId,
+      paymentPlan: plan
+    },
+    callback: function (response) {
+      console.log('✅ Paystack callback received:', response);
+      closePaymentScreen();
+      setTimeout(() => {
+        openStatusScreen();
+        setStatusLoading();
+        document.getElementById('statusTitle').innerText = 'Confirming your payment\u2026';
+        setTimeout(() => {
+          const isInstallment = plan === 'installment';
+          setStatusSuccess(
+            isInstallment ? 'First Installment Received' : 'Payment Received',
+            (isInstallment ? 'Your login code is on its way to your email. ' : 'Your seat is confirmed. ') +
+            'Reference: ' + response.reference
+          );
+        }, 1400);
+      }, 450);
+    },
+    onClose: function () {}
+  });
+  handler.openIframe();
+};
 
     /* =====================================================================
        CONTACT FORM + FAQ "ASK US" BOX
