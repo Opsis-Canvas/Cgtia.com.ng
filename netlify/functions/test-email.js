@@ -1,7 +1,7 @@
 const { sendMail } = require('./lib/email');
 
 exports.handler = async (event) => {
-  const to = process.env.ADMIN_EMAIL || 'cgtiioffice@gmail.com';
+  const to = process.env.ADMIN_EMAIL;
 
   try {
     await sendMail({
