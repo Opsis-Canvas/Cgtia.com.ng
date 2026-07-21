@@ -32,18 +32,14 @@ async function provisionStudentAccount(applicationId, appData) {
   const uid = applicationId;
   const email = appData.email;
   
-  console.log('📧 [provisionStudentAccount] Starting...');
-  
   try {
     await admin.auth().getUserByEmail(email);
-    console.log('👤 User already exists – updating...');
     await admin.auth().updateUser(uid, {
       email,
       displayName: appData.fullName || '',
     });
   } catch (err) {
     if (err.code === 'auth/user-not-found') {
-      console.log('👤 User not found – creating new user...');
       await admin.auth().createUser({
         uid,
         email,
@@ -51,15 +47,12 @@ async function provisionStudentAccount(applicationId, appData) {
         emailVerified: true,
         password: Math.random().toString(36).slice(-12),
       });
-      console.log('✅ User created');
     } else {
-      console.error('❌ Error checking user:', err);
       throw err;
     }
   }
   
   await admin.auth().setCustomUserClaims(uid, { role: 'student' });
-  console.log('✅ Custom claims set');
   
   await db.collection('users').doc(uid).set({
     email,
@@ -73,18 +66,14 @@ async function provisionStudentAccount(applicationId, appData) {
     createdAt: new Date(),
     updatedAt: new Date(),
   }, { merge: true });
-  console.log('✅ Firestore user profile created');
   
-  console.log('📧 Attempting to send welcome email...');
   const { sendMail } = require('./email');
-  
   const loginUrl = 'https://cgtiacademy.netlify.app/';
   
-  try {
-    await sendMail({
-      to: email,
-      subject: 'Your CGTIA Student Account',
-      text: `Hello ${appData.fullName || 'Student'},
+  await sendMail({
+    to: email,
+    subject: 'Your CGTIA Student Account',
+    text: `Hello ${appData.fullName || 'Student'},
 
 Your CGTIA student account has been created.
 
@@ -95,11 +84,7 @@ You will need to set a new password on your first login.
 
 Regards,
 CGTIA Admissions Team`,
-    });
-    console.log('✅ Welcome email sent successfully!');
-  } catch (err) {
-    console.error('❌ Failed to send welcome email:', err.message);
-  }
+  });
   
   return { uid };
 }

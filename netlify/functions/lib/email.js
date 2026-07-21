@@ -1,16 +1,12 @@
 const nodemailer = require('nodemailer');
 
 async function sendMail({ to, subject, text, html }) {
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
-  
-  console.log('📧 [sendMail] called');
-  console.log('   GMAIL_USER configured?', !!user);
-  console.log('   GMAIL_APP_PASSWORD configured?', !!pass);
+  const user = process.env.EMAIL_SENDER;
+  const pass = process.env.EMAIL_PASSWORD;
   
   if (!user || !pass) {
-    console.error('❌ [sendMail] Gmail credentials missing!');
-    throw new Error('Gmail credentials not configured');
+    console.warn('Email credentials not set – skipping email');
+    return;
   }
   
   const transporter = nodemailer.createTransport({
@@ -29,11 +25,10 @@ async function sendMail({ to, subject, text, html }) {
       text: text || '',
       html: html || (text ? text.replace(/\n/g, '<br>') : ''),
     });
-    console.log('✅ [sendMail] Email sent successfully!');
-    console.log('📧 Message ID:', info.messageId);
+    console.log('✅ Email sent successfully!');
     return info;
   } catch (err) {
-    console.error('❌ [sendMail] Email sending failed:', err.message);
+    console.error('❌ Email sending failed:', err.message);
     throw err;
   }
 }
