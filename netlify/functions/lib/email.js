@@ -4,9 +4,7 @@ async function sendMail({ to, subject, text, html }) {
   const user = process.env.GMAIL_USER;
   const pass = process.env.GMAIL_APP_PASSWORD;
   
-  console.log('📧 [sendMail] called with:');
-  console.log('   To:', to);
-  console.log('   Subject:', subject);
+  console.log('📧 [sendMail] called');
   console.log('   GMAIL_USER configured?', !!user);
   console.log('   GMAIL_APP_PASSWORD configured?', !!pass);
   
