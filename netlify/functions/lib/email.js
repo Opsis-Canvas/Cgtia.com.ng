@@ -33,11 +33,9 @@ async function sendMail({ to, subject, text, html }) {
     });
     console.log('✅ [sendMail] Email sent successfully!');
     console.log('📧 Message ID:', info.messageId);
-    console.log('📧 Response:', info.response);
     return info;
   } catch (err) {
     console.error('❌ [sendMail] Email sending failed:', err.message);
-    console.error('📧 Full error:', err);
     throw err;
   }
 }
