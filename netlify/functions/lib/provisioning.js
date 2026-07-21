@@ -32,9 +32,8 @@ async function provisionStudentAccount(applicationId, appData) {
   const uid = applicationId;
   const email = appData.email;
   
-  console.log('📧 [provisionStudentAccount] Starting for:', email);
+  console.log('📧 [provisionStudentAccount] Starting...');
   
-  // Check if user already exists
   try {
     await admin.auth().getUserByEmail(email);
     console.log('👤 User already exists – updating...');
@@ -52,18 +51,16 @@ async function provisionStudentAccount(applicationId, appData) {
         emailVerified: true,
         password: Math.random().toString(36).slice(-12),
       });
-      console.log('✅ User created with UID:', uid);
+      console.log('✅ User created');
     } else {
       console.error('❌ Error checking user:', err);
       throw err;
     }
   }
   
-  // Set custom claims for student role
   await admin.auth().setCustomUserClaims(uid, { role: 'student' });
-  console.log('✅ Custom claims set for student role');
+  console.log('✅ Custom claims set');
   
-  // Create user profile in Firestore
   await db.collection('users').doc(uid).set({
     email,
     fullName: appData.fullName || '',
@@ -76,13 +73,11 @@ async function provisionStudentAccount(applicationId, appData) {
     createdAt: new Date(),
     updatedAt: new Date(),
   }, { merge: true });
-  console.log('✅ Firestore user profile created/updated');
+  console.log('✅ Firestore user profile created');
   
-  // Send login credentials email
-  console.log('📧 Attempting to send welcome email to:', email);
+  console.log('📧 Attempting to send welcome email...');
   const { sendMail } = require('./email');
   
-  // Determine the correct login URL – use Netlify domain since that's what's live
   const loginUrl = 'https://cgtiacademy.netlify.app/';
   
   try {
@@ -104,8 +99,6 @@ CGTIA Admissions Team`,
     console.log('✅ Welcome email sent successfully!');
   } catch (err) {
     console.error('❌ Failed to send welcome email:', err.message);
-    console.error('📧 Full error:', err);
-    // Don't throw – the account is already created, email can be resent later
   }
   
   return { uid };
