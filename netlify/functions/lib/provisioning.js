@@ -29,19 +29,22 @@ async function recordInstallmentPayment(appRef, appData, method, reference) {
 }
 
 async function provisionStudentAccount(applicationId, appData) {
-  const uid = applicationId; // or generate a new UID
+  const uid = applicationId;
   const email = appData.email;
+  
+  console.log('📧 [provisionStudentAccount] Starting for:', email);
   
   // Check if user already exists
   try {
     await admin.auth().getUserByEmail(email);
-    // User exists – update instead of create
+    console.log('👤 User already exists – updating...');
     await admin.auth().updateUser(uid, {
       email,
       displayName: appData.fullName || '',
     });
   } catch (err) {
     if (err.code === 'auth/user-not-found') {
+      console.log('👤 User not found – creating new user...');
       await admin.auth().createUser({
         uid,
         email,
@@ -49,13 +52,16 @@ async function provisionStudentAccount(applicationId, appData) {
         emailVerified: true,
         password: Math.random().toString(36).slice(-12),
       });
+      console.log('✅ User created with UID:', uid);
     } else {
+      console.error('❌ Error checking user:', err);
       throw err;
     }
   }
   
   // Set custom claims for student role
   await admin.auth().setCustomUserClaims(uid, { role: 'student' });
+  console.log('✅ Custom claims set for student role');
   
   // Create user profile in Firestore
   await db.collection('users').doc(uid).set({
@@ -70,24 +76,37 @@ async function provisionStudentAccount(applicationId, appData) {
     createdAt: new Date(),
     updatedAt: new Date(),
   }, { merge: true });
+  console.log('✅ Firestore user profile created/updated');
   
   // Send login credentials email
+  console.log('📧 Attempting to send welcome email to:', email);
   const { sendMail } = require('./email');
-  await sendMail({
-    to: email,
-    subject: 'Your CGTIA Student Account',
-    text: `Hello ${appData.fullName || 'Student'},
+  
+  // Determine the correct login URL – use Netlify domain since that's what's live
+  const loginUrl = 'https://cgtiacademy.netlify.app/';
+  
+  try {
+    await sendMail({
+      to: email,
+      subject: 'Your CGTIA Student Account',
+      text: `Hello ${appData.fullName || 'Student'},
 
 Your CGTIA student account has been created.
 
-Login at: https://cgtia.org/index.html
+Login at: ${loginUrl}
 Email: ${email}
 
 You will need to set a new password on your first login.
 
 Regards,
 CGTIA Admissions Team`,
-  });
+    });
+    console.log('✅ Welcome email sent successfully!');
+  } catch (err) {
+    console.error('❌ Failed to send welcome email:', err.message);
+    console.error('📧 Full error:', err);
+    // Don't throw – the account is already created, email can be resent later
+  }
   
   return { uid };
 }
