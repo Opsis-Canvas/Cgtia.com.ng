@@ -127,23 +127,6 @@
             100% { transform: scale(1); }
         }
 
-        /* Welcome text switcher */
-        .text-switcher {
-            position: relative;
-            height: 1.25rem;
-            overflow: hidden;
-        }
-        .text-switcher-item {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-        }
-
         /* Entrance animations */
         .slide-from-bottom {
             animation: slideUpPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
@@ -187,13 +170,10 @@
                 </div>
             </div>
             <div class="flex flex-col overflow-hidden">
-                <div class="text-sm text-gray-600 leading-tight flex items-center gap-2 text-switcher w-36 sm:w-48">
-                    <div class="text-switcher-item" id="welcome-text-1">
-                        <span class="font-bold italic text-black">Welcome Back</span>
-                    </div>
-                    <div class="text-switcher-item" id="welcome-text-2" style="transform: translateY(100%); opacity: 0;">
-                        <span id="user-fullname" class="font-bold text-black text-xs sm:text-sm">Student</span>
-                    </div>
+                <!-- STATIC WELCOME TEXT: shows "Welcome Back, [First Name]" -->
+                <div class="text-sm text-gray-700 leading-tight font-semibold">
+                    <span id="welcome-greeting" class="font-bold italic text-black">Welcome Back,</span>
+                    <span id="user-firstname-display" class="font-bold text-blue-700">Student</span>
                 </div>
                 <div class="font-black text-lg sm:text-xl tracking-wide leading-tight text-blue-700 flex items-center gap-1.5 mt-0.5">
                     <i class="fa-solid fa-shield-heart text-blue-600"></i> CareEd
@@ -726,7 +706,7 @@
     const skeleton = document.getElementById('skeleton-loader');
     const mainContent = document.getElementById('main-content');
     const avatarLetter = document.getElementById('avatar-letter');
-    const userNameSpan = document.getElementById('user-fullname');
+    const userFirstNameDisplay = document.getElementById('user-firstname-display');
     const userEmailShort = document.getElementById('user-email-short');
     const userLastName = document.getElementById('user-lastname');
     const userProgram = document.getElementById('user-program');
@@ -755,8 +735,14 @@
 
             const userData = userSnap.data();
             const fullName = userData.fullName || 'Student';
+            const firstName = fullName.split(' ')[0] || 'Student';
+            const lastName = fullName.split(' ').slice(1).join(' ') || 'Student';
             const program = userData.program || 'Not enrolled';
             const applicationId = userData.applicationId || uid;
+
+            // Show the first name in the welcome text
+            userFirstNameDisplay.textContent = firstName;
+            avatarLetter.textContent = firstName.charAt(0).toUpperCase();
 
             let appData = {};
             if (applicationId) {
@@ -767,10 +753,6 @@
                 }
             }
 
-            const firstName = fullName.split(' ')[0] || 'Student';
-            const lastName = fullName.split(' ').slice(1).join(' ') || 'Student';
-            avatarLetter.textContent = firstName.charAt(0).toUpperCase();
-            userNameSpan.textContent = fullName;
             userEmailShort.textContent = email.split('@')[0] || 'user';
             userLastName.textContent = lastName.toUpperCase();
 
@@ -807,8 +789,8 @@
         const email = user.email;
         const name = user.displayName || 'Student';
         const firstName = name.split(' ')[0] || 'Student';
+        userFirstNameDisplay.textContent = firstName;
         avatarLetter.textContent = firstName.charAt(0).toUpperCase();
-        userNameSpan.textContent = name;
         userEmailShort.textContent = email ? email.split('@')[0] : 'user';
         userLastName.textContent = name.split(' ').slice(1).join(' ')?.toUpperCase() || 'STUDENT';
         userProgram.textContent = 'Student';
@@ -916,18 +898,6 @@
             this.classList.add('haptic-feedback');
         });
     });
-
-    // Welcome text switch (delayed)
-    setTimeout(() => {
-        const text1 = document.getElementById('welcome-text-1');
-        const text2 = document.getElementById('welcome-text-2');
-        if (text1 && text2) {
-            text1.style.transform = 'translateY(-100%)';
-            text1.style.opacity = '0';
-            text2.style.transform = 'translateY(0)';
-            text2.style.opacity = '1';
-        }
-    }, 6000);
 </script>
 </body>
 </html>
